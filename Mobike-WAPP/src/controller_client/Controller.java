@@ -25,7 +25,6 @@ import com.sun.jersey.api.view.Viewable;*/
 @Path("/")
 public class Controller {
 	private static final String BaseURI = "http://localhost:8080/Mobike-SRV/";
-	Client c = Client
 	
 	
 	
@@ -151,4 +150,4 @@ public class Controller {
 //		return new Viewable("/provaoutput", "bello");
 //	}
 //	
-}
+
