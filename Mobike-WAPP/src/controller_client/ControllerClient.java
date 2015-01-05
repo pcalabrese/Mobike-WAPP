@@ -1,5 +1,19 @@
 package controller_client;
 
+
+import java.net.URI;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+
+import org.apache.catalina.WebResource;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientResponse;
+
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -15,49 +29,28 @@ import javax.ws.rs.client.WebTarget;
 
 import javax.ws.rs.core.MediaType;
 
-/*import org.codehaus.jettison.json.JSONObject;
-import org.glassfish.grizzly.http.server.HttpServer;
-
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.view.Viewable;*/
-
 @Path("/")
-public class Controller {
-	private static final String BaseURI = "http://localhost:8080/Mobike-SRV/";
-	
-	
-	
-	}
-	
-	
-	
-/*
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+public class ControllerClient {
+	  public static void main(String[] args) {
+		  
+		    ClientConfig config = new ClientConfig();
 
-import org.codehaus.jettison.json.JSONObject;
+		    Client client = ClientBuilder.newClient(config);
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.view.Viewable;
- 
- @Path("/")
-public class Controller {
+		    WebTarget target = client.target(getBaseURI());
+
+		  }
+
+		  private static URI getBaseURI() {
+
+		    return UriBuilder.fromUri("http://localhost:8080/Mobike-SRV").build();
+
+		  }
+		  
+}
+
 	
-	private static final String BaseURI = "http://localhost:8080/web.crawlerplatform.first/";
-	
-	Client client = Client.create();
-	private final WebResource wr = client.resource(BaseURI);
-	
+	/*
 	@GET
 	public Viewable welcome(){
 		return new Viewable("/index.jsp", "welcome");

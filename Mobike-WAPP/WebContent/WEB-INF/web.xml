@@ -9,4 +9,33 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-</web-app>
+ 
+ <servlet>
+    <servlet-name>Mobike REST Client</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    
+    <init-param>
+        <param-name>jersey.config.server.provider.packages</param-name>
+        <param-value>controller_client</param-value>
+    </init-param>
+    
+      <init-param>
+        <param-name>com.sun.jersey.config.property.JSPTemplatesBasePath</param-name>
+        <param-value>/WEB-INF/</param-value>
+    </init-param>
+    
+    <init-param>
+        <param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name>
+        <param-value>/(images|css)/.*</param-value>
+    </init-param>
+    <!--- <test commenti <load-on-startup>1</load-on-startup>/> -->
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Mobike REST Client</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+
+
+</web-app> 
+
+  
