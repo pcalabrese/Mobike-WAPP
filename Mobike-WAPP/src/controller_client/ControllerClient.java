@@ -1,19 +1,6 @@
 package controller_client;
 
 
-import java.net.URI;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-
-import org.apache.catalina.WebResource;
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.ClientResponse;
-
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -22,35 +9,23 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-	 
-
 import javax.ws.rs.core.MediaType;
+
+import org.codehaus.jettison.json.JSONObject;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.view.Viewable;
 
 @Path("/")
 public class ControllerClient {
-	  public static void main(String[] args) {
-		  
-		    ClientConfig config = new ClientConfig();
-
-		    Client client = ClientBuilder.newClient(config);
-
-		    WebTarget target = client.target(getBaseURI());
-
-		  }
-
-		  private static URI getBaseURI() {
-
-		    return UriBuilder.fromUri("http://localhost:8080/Mobike-SRV").build();
-
-		  }
-		  
-}
-
 	
-	/*
+	private static final String BaseURI = "http://localhost:8080/Mobike-SRV/";
+	
+	Client client = Client.create();
+	private final WebResource wr = client.resource(BaseURI);
+	
 	@GET
 	public Viewable welcome(){
 		return new Viewable("/index.jsp", "welcome");
@@ -62,6 +37,13 @@ public class ControllerClient {
 		return new Viewable("/index.jsp", "welcome");
 	}
 	
+	@GET
+	@Path("/prova")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String prova(){
+		return "helloprova";
+	}
+	/*
 	@GET
 	@Path("/search")
 	public Viewable startSearch(){
@@ -110,12 +92,8 @@ public class ControllerClient {
 		ClientResponse response = wr.path("/analysis").path("/start").type(MediaType.APPLICATION_JSON).post(ClientResponse.class,input);
 		JSONObject output = response.getEntity(JSONObject.class);
 		
-		return new Viewable("/analysisDone",output);
+		return new Viewable("/analysisDone",output);*/
 	}
-	
-*/
-	
-	
 	
 	
 	
@@ -143,4 +121,3 @@ public class ControllerClient {
 //		return new Viewable("/provaoutput", "bello");
 //	}
 //	
-
