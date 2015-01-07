@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>MoBike, Share your routes!</title>
+		<title>MoBike, Enjoy all the routes!</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -11,6 +11,40 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<link href="css/styles.css" rel="stylesheet">
+		    	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script>
+	
+	$.makeTable = function (mydata) {
+	    var table = $('<table>');
+	    var tblHeader = "<tr>";
+	    for (var k in mydata[0]) if(k!="url"){ tblHeader += "<th>" + k + "</th>";}
+	    tblHeader += "</tr>";
+	    $(tblHeader).appendTo(table);
+	    $.each(mydata, function (index, value) {
+	        var TableRow = "<tr>";
+	        $.each(value, function (key, val) {
+	            if(key!="url"){
+	        	TableRow += "<td>" + val + "</td>";}
+	        });
+	        TableRow += "</tr>";
+	        $(table).append(TableRow);
+	    });
+	    return ($(table));
+	};
+	
+	
+	
+	$(document).ready(function(){
+			  var urir = "http://localhost:8080/Mobike-WAPP/testjson";
+		    $.getJSON(urir,function(result){
+		   	var mydata = result;
+			var table = $.makeTable(mydata);
+	$(table).appendTo("#tableFromJson");
+		    });
+		  
+	});
+		    
+	</script>
 	</head>
 	<body>
 <!-- begin template -->
@@ -23,8 +57,8 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="home">Home</a></li>
-        <li><a href="itineraries">Itineraries</a></li>
+        <li><a href="home">Home</a></li>
+        <li class="active"><a href="itineraries">Itineraries</a></li>
         <li><a href="aboutus">About Us</a></li>
         <li>&nbsp;</li>
       </ul>
@@ -53,8 +87,9 @@
 <div class="container-fluid" id="main">
   <div class="row">
   	<div class="col-xs-8" id="left">
-    
-      <h2>Mobike - Create, Discover and share route for bikers by bikers</h2>
+     <hr>
+       <h2>Uploaded Itineraries</h2>
+     <hr>
       <!-- item list -->
       <!--<div class="panel panel-default">
         <div class="panel-heading"><a href="">Item heading</a></div>
@@ -63,42 +98,38 @@
         Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
         dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
         Aliquam in felis sit amet augue.</p> -->      
-      <hr>
+     
+      <p>
       
-   	<div class="panel panel-default">
-        <div class="panel-heading"><a href="">HOME</a></div>
-      </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-        Aliquam in felis sit amet augue.</p>
+      
+      <div class="datagrid" id="tableFromJson" align="center"></div></p>
       
       <hr>
       <!-- /item list -->
       
-      <p>
-     <!-- link footer  <a href="http://www.bootply.com/render/129229">Demo</a> | <a href="http://bootply.com/129229">Source Code</a> -->
+     <!--   <p>
+      <a href="http://www.bootply.com/render/129229">Demo</a> | <a href="http://bootply.com/129229">Source Code</a>
       </p>
       
-     <!--   <hr> -->
-        
+      <hr> 
+          -->
       <p>
-      <a href="http://bootply.com" target="_ext" class="center-block btn btn-primary">More Bootstrap Snippets on Bootply</a>
+      <a href="https://sites.google.com/a/dis.uniroma1.it/google-technologies-for-cloud-and-web-development/" target="_ext" class="center-block btn btn-primary">Google Workshop for Cloud and Web Development</a>
       </p>
         
       <hr>      
 
     </div>
-     <div class="col-xs-4"> <!--  map-canvas will be postioned here--></div>
-    
+    <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
+  
   </div>
 </div>
 <!-- end template -->
 
-	<!-- script references 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+	
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		 script references	<script src="js/bootstrap.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&output=embed"></script>
-		<script src="js/scripts.js"></script> -->
+		<script src="js/scripts.js"></script>  -->
 	</body>
 </html>
