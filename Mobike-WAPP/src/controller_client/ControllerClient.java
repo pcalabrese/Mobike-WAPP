@@ -77,7 +77,10 @@ public class ControllerClient {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Viewable itineraryDetails(@PathParam ("id") long id){
 		return new Viewable("/itinerarydetail.html", id);
-		
-		
+	}
+	@GET
+	@Path("/itntest")
+	public Viewable itntest(){
+		return new Viewable("/itinerarydetail.html");
 	}
 }

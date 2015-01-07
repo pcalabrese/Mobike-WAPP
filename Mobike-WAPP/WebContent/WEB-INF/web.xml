@@ -22,7 +22,7 @@
     </init-param>
     <init-param>
         <param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name>
-        <param-value>/(images|css)/.*</param-value>
+        <param-value>/(images|css|js)/.*</param-value>
     </init-param>
     <init-param>
     <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
