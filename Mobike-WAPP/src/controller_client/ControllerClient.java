@@ -11,8 +11,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -28,13 +33,13 @@ public class ControllerClient {
 	
 	@GET
 	public Viewable welcome(){
-		return new Viewable("/index.jsp", "welcome");
+		return new Viewable("/index.html", "welcome");
 	}
 	
 	@GET
 	@Path("/home")
 	public Viewable home(){
-		return new Viewable("/index.jsp", "welcome");
+		return new Viewable("/index.html", "welcome");
 	}
 	
 	@GET
@@ -43,13 +48,34 @@ public class ControllerClient {
 	public String prova(){
 		return "helloprova";
 	}
-	/*
+	
 	@GET
-	@Path("/search")
-	public Viewable startSearch(){
-		return new Viewable("/startSearch.jsp", "startsearch");
+	@Path("/routes")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Viewable getRoutes(){
+		ClientResponse response = wr.path("/routes").path("/retrieveall").accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+		String output = response.getEntity(String.class);
+		String output2 = output.substring(1, output.length());
+		JSONObject object = null;
+		try {
+			object = new JSONObject(output2);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Viewable("/paths.html",object);
+		
+		
+		
+	
 	}
-
+	
+	@GET
+	@Path("/test")
+	public Viewable testmethod(){
+		return new Viewable("/test.jsp","welcome");
+	}
+	/*
 	@GET
 	@Path("/analysis")
 	public Viewable startAnalysis(){
