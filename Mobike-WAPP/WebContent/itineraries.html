@@ -38,7 +38,7 @@
 	
 	
 	$(document).ready(function(){
-			  var urir = "http://localhost:8080/Mobike-WAPP/testjson";
+			  var urir = "http://mobike.ddns.net/WAPP/getitineraries";
 		    $.getJSON(urir,function(result){
 		   	var mydata = result;
 			var table = $.makeTable(mydata);

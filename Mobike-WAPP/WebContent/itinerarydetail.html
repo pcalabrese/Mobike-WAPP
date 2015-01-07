@@ -19,6 +19,9 @@
         <script src="js/loadgpx.js" type="text/javascript"></script>
         <script type="text/javascript">
             //<![CDATA[
+                       
+        var a = window.location.href;
+		var b = a.substring(40);
 
             function loadGPXFileIntoGoogleMap(map, filename) {
                 $.ajax({url: filename,
@@ -42,7 +45,7 @@
                 };
                 var map = new google.maps.Map(document.getElementById("map"),
                     mapOptions);
-                loadGPXFileIntoGoogleMap(map, "http://localhost:8080/Mobike-SRV/routes/retrieve/54/gpx");
+                loadGPXFileIntoGoogleMap(map, "http://mobike.ddns.net/SRV/routes/retrieve/"+b+"/gpx");
             });
 
         //]]>

@@ -63,20 +63,26 @@ public class ControllerClient {
 	}
 	
 	@GET
-	@Path("/testjson")
+	@Path("/getitineraries")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public String testjson(){
+	public String getItineraries(){
 		String output = wr.path("/routes").path("/retrieveall").accept(MediaType.APPLICATION_JSON).get(String.class);
 		return output;
 		
 	}
+	@GET
+	@Path("/getitnbyid/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getItnById(@PathParam ("id") long id){
+		String output = wr.path("/routes").path("/retrieve").path("/"+id).accept(MediaType.APPLICATION_JSON).get(String.class);
+		return output;
+	
+	}
 	
 	@GET
 	@Path("/itineraries/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Viewable itineraryDetails(@PathParam ("id") long id){
-		return new Viewable("/itinerarydetail.html", id);
+		return new Viewable("/itinerarydetail.html", "details");
 	}
 	@GET
 	@Path("/itntest")
