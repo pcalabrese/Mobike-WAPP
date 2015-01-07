@@ -87,6 +87,6 @@ public class ControllerClient {
 	@GET
 	@Path("/itntest")
 	public Viewable itntest(){
-		return new Viewable("/itinerarydetail.html");
+		return new Viewable("/NewFile.html");
 	}
 }

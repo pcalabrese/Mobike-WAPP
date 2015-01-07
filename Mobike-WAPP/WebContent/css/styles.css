@@ -23,6 +23,7 @@ h2{
 	margin-bottom: 20px;
 	font-size: 35px;
 	text-align: center;
+	font-family: inherit;
 }
 
 .navbar-custom .icon-bar {
