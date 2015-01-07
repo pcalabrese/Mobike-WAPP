@@ -23,6 +23,9 @@
 	    $.each(mydata, function (index, value) {
 	        var TableRow = "<tr>";
 	        $.each(value, function (key, val) {
+	        	if(key=="id"){
+			        TableRow += "<td><a href=\"itineraries/"+val+"\">"+val+"</a></td>";}
+		            else 
 	            if(key!="url"){
 	        	TableRow += "<td>" + val + "</td>";}
 	        });
