@@ -16,6 +16,14 @@ html,body{
 body{
   	padding-top:50px; /*padding for navbar*/
 }
+
+#maintitle{
+  	font-size: 40px;
+}
+#maintext{
+	margin-top: 50px;
+  	font-size: 25px;
+}
 h2{
 	color: #00496B;
 	margin-left: 40px;
