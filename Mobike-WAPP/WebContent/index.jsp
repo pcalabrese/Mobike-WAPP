@@ -1,6 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -10,8 +13,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/styles.css" rel="stylesheet">
+		<style type="text/css">
+		.hide { display: none;}
+		.show { display: block;}
+		</style>
 	</head>
-	<body>
+	
+<body>
 <div class="navbar navbar-custom navbar-fixed-top">
  <div class="navbar-header"><a class="navbar-brand" href="#">MoBike</a>
         <span class="icon-bar">
@@ -56,83 +64,26 @@
       <hr>
    	<div class="panel panel-default">
         <div class="panel-heading" id="maintitle"><a href="">What is Mobike?</a></div>
-      </div>
+    </div>
        <hr>
        <hr>
       <p id="maintext">Mobike is an app to create, share and discover routes for motorcycle enthusiasts!    <br> Record your trip with our mobile app and share it with your friends, browse uploaded itineraries available on the website </p>
+   	<br>
+   		<div id="profile">Nome: ${user.name} Cognome: ${user.surname} Email: ${user.email}</div>
+   	
+   	</br>
    	<br></br>
-   		<input type="button"  value="Login" onclick="login()" />
-		<input type="button"  value="Logout" onclick="logout()" />
-		<div id="profile">User Information</div>
-         <br></br>
-   	<hr><hr>
+   	<hr>
+   	<hr>
       <p>
-
-<script type="text/javascript">
-
-function logout()
-{
-    gapi.auth.signOut();
-    location.reload();
-}
-function login() 
-{
-  var myParams = {
-    'clientid' : '648355147327-l29pdutihnfa25kdmo1ocjankqg4217c.apps.googleusercontent.com',
-    'cookiepolicy' : 'single_host_origin',
-    'callback' : 'loginCallback',
-    'approvalprompt':'force',
-    'scope' : 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
-  };
-  gapi.auth.signIn(myParams);
-}
- 
-function loginCallback(result){
-    if(result['status']['signed_in']){
-        var request = gapi.client.plus.people.get({'userId': 'me'});
-        request.execute(function (resp){
-            var email = '';
-            if(resp['emails']){
-                for(i = 0; i < resp['emails'].length; i++){
-                    if(resp['emails'][i]['type'] == 'account'){
-                        email = resp['emails'][i]['value'];
-                    }
-                }
-            }
-            var str = "Name:" + resp['displayName'] + "<br>";
-            str += "Image:" + resp['image']['url'] + "<br>";
-            str += "<img src='" + resp['image']['url'] + "' /><br>";
-            str += "URL:" + resp['url'] + "<br>";
-            str += "Email:" + email + "<br>";
-            document.getElementById("profile").innerHTML = str;
-        });
- 
-    }
- 
-}
-
-function onLoadCallback(){
-    gapi.client.setApiKey('kFPvMH88ifFkbKYnsFsPq5Me');
-    gapi.client.load('plus', 'v1',function(){});
-}
- 
-</script>
-<script type="text/javascript">
-      (function() {
-       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-       po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-     })();
-</script>
-      
-      </p>
-      <p>
-      <a href="https://sites.google.com/a/dis.uniroma1.it/google-technologies-for-cloud-and-web-development/" target="_ext" class="center-block btn btn-primary">Google Workshop for Cloud and Web Development</a>
+      	<a href="https://sites.google.com/a/dis.uniroma1.it/google-technologies-for-cloud-and-web-development/" target="_ext" class="center-block btn btn-primary">Google Workshop for Cloud and Web Development</a>
       </p>     
-      <hr>      
+    <hr>      
     </div>
-  </div>
-</div>
-
+  	</div>
+	</div>
+	
+ 
+	
 	</body>
 </html>
