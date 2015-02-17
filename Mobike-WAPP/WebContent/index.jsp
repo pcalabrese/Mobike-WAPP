@@ -74,7 +74,7 @@
        <hr>
       <p id="maintext">Mobike is an app to create, share and discover routes for motorcycle enthusiasts!    <br> Record your trip with our mobile app and share it with your friends, browse uploaded itineraries available on the website </p>
    	<br>
-   		<div id="profile">Nome: ${user.name} Cognome: ${user.surname} Email: ${user.email}</div>
+   		<div id="profile">Nome: ${user.name} Cognome: ${user.surname} Email: ${user.email} Id: ${user.id}</div>
    	
    	</br>
    	<br></br>

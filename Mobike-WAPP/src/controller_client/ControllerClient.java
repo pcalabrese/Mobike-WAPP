@@ -105,18 +105,11 @@ public class ControllerClient {
 		//Converto il json in un oggetto Properties
 		Properties pr = gson.fromJson(json, Properties.class);
 		
-		//Chiedo al SRV se l'utente esiste già nel DB
-		String output = wr.path("/users").path("/check").queryParam("userjson", json).get(String.class);
-		boolean exists = Boolean.getBoolean(output);
+		
 		String id = null;
-		
-		//Se non esiste aggiungo l'utente al DB
-		if(!exists){
-			ClientResponse response = wr.path("/users").path("/create").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
-			id = response.getEntity(String.class);
-		}
-		
-		
+		ClientResponse response = wr.path("/users").path("/auth").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
+		id = response.getEntity(String.class);
+	
 		//Prendo la sessione e aggiungo i dati dell'utente in una HashMap User
 		HttpSession session = req.getSession(true);
 		Map <String,String> user = new HashMap<String,String>();
