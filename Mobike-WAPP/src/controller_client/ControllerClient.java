@@ -7,26 +7,16 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -109,21 +99,52 @@ public class ControllerClient {
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String loginok(String json, @Context HttpServletRequest req){
+	public String login(String json, @Context HttpServletRequest req){
+		//inizializzo Gson
 		Gson gson = new GsonBuilder().create();
+		//Converto il json in un oggetto Properties
 		Properties pr = gson.fromJson(json, Properties.class);
 		
+		//Chiedo al SRV se l'utente esiste già nel DB
+		String output = wr.path("/users").path("/check").queryParam("userjson", json).get(String.class);
+		boolean exists = Boolean.getBoolean(output);
+		String id = null;
+		
+		//Se non esiste aggiungo l'utente al DB
+		if(!exists){
+			ClientResponse response = wr.path("/users").path("/create").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
+			id = response.getEntity(String.class);
+		}
+		
+		
+		//Prendo la sessione e aggiungo i dati dell'utente in una HashMap User
 		HttpSession session = req.getSession(true);
 		Map <String,String> user = new HashMap<String,String>();
 		user.put("name", pr.getProperty("name"));
 		user.put("surname", pr.getProperty("surname"));
 		user.put("email", pr.getProperty("email"));
+		if(id!=null)
+			user.put("id", id);
 		
-		
+		//setto la HashMap come attributo della sessione
 		session.setAttribute("user", user);
 		
-		
+		//restituisco la URL a cui reindirizzare il browser
 		return "/WAPP/home";
 	}
+
 	
+	@GET
+	@Path("/logout")
+	@Consumes(MediaType.TEXT_PLAIN)
+	public String logout(@Context HttpServletRequest req){
+		HttpSession session = req.getSession();
+		
+		if(session != null){
+			session.removeAttribute("user");
+		}
+		
+		return "/WAPP/landing";
+		
+	}
 }

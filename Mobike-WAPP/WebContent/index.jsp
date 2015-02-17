@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
@@ -32,6 +33,7 @@
         <li class="active"><a href="home">Home</a></li>
         <li><a href="itineraries">Itineraries</a></li>
         <li><a href="aboutus">About Us</a></li>
+        <li><a href="events">Events</a></li>
         <li>&nbsp;</li>
       </ul>
       <form class="navbar-form">
@@ -47,8 +49,11 @@
                 <li><a href="#">Category 5</a></li> 
               </ul>
             </div>
+            
             <input type="text" class="form-control" placeholder="Search for routes (under development)">
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+            <input type="button" class="myButton" value="Logout" onclick="logout()" style="vertical-align: middle; text-align:right; float:right;"/>
+            
           </div>
         </div>
       </form>
@@ -84,6 +89,20 @@
 	</div>
 	
  
-	
+	<script type="text/javascript">
+		function logout(){
+			alert("bottone premuto");
+			$.ajax({
+		        	type: "GET",
+		        	url: "/WAPP/logout",
+		        	data: "",
+		        	contentType: "text/plain",
+		        	dataType: "text",
+		        	success: function(data){window.location=data},
+		        	failure: function(errMsg) {alert(errMsg);},
+		        	error: function(asd, text, wetr){alert(text);}
+		  	});
+    	}
+	</script>
 	</body>
 </html>
