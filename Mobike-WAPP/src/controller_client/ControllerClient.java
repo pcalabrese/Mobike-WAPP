@@ -1,6 +1,9 @@
 package controller_client;
 
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -8,6 +11,7 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.jersey.api.client.Client;
@@ -122,6 +127,8 @@ public class ControllerClient {
 		//setto la HashMap come attributo della sessione
 		session.setAttribute("user", user);
 		
+		
+		
 		//restituisco la URL a cui reindirizzare il browser
 		return "/WAPP/home";
 	}
@@ -137,7 +144,68 @@ public class ControllerClient {
 			session.removeAttribute("user");
 		}
 		
-		return "/WAPP/landing";
+		return "/WAPP/landing";	
+	}
+	
+	@GET
+	@Path("/getEvents")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getEvents(){
+		String output = wr.path("/events").path("/retrieveall").accept(MediaType.APPLICATION_JSON).get(String.class);
+		return output;
+	}
+	
+	@GET
+	@Path("/getEventById/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+		public String getEventById(@PathParam ("id") long id){
+			String output = wr.path("/events").path("/retrieve").path("/"+id).accept(MediaType.APPLICATION_JSON).get(String.class);
+			return output;
 		
+		}
+	
+	@GET
+	@Path("/events")
+	@Produces(MediaType.TEXT_HTML)
+	public Viewable events(){
+		return new Viewable("/events.jsp",null);
+	}
+	
+	@GET
+	@Path("/events/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	public Viewable eventId(@PathParam("id") long id){
+		return new Viewable("/eventdetail.jsp",null);
+	}
+	
+	@GET
+	@Path("/events/new")
+	@Produces(MediaType.TEXT_HTML)
+	public Viewable eventnew(){
+		return new Viewable("/createevent.jsp",null);
+	}
+	
+	@POST
+	@Path("/events/insertnew")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String insertNew(@FormParam("name")String name, @FormParam("description") String description, 
+							@FormParam("date") String date, @FormParam("time") String time, 
+							@FormParam("startLocation") String startLocation, @FormParam("routeId") String routeId,@Context HttpServletRequest req){
+		
+		HttpSession session = req.getSession();
+		@SuppressWarnings("unchecked")
+		Map<String,String> user = (Map<String, String>) session.getAttribute("user");
+		String id  = user.get("id");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date currentDate = new Date();
+		String creationDate = dateFormat.format(currentDate);
+		String dateTime = date + " " + time + ":00";
+		
+		String json = "Event [id=" + id + ", name=" + name + ", description=" + description + ", routeId=" + routeId +", startDate=" + dateTime +
+				", startLocation=" + startLocation +", creationDate=" + creationDate + "]";
+		
+		ClientResponse response = wr.path("/events").path("/create").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
+		String output = response.getEntity(String.class);
+		return output;
 	}
 }

@@ -26,7 +26,7 @@
       <div class="container-fluid" id="main">
          <div class="row">
             <div class="col-xs-8" id="left">
-               <div id="imgcontainer" margin-left:"300"></div>
+               <div id="imgcontainer"></div>
                <hr>
                <h2>
                   <img src="images/logo.png" width="600" height="220">
@@ -36,7 +36,7 @@
                </h2>
                
                   
-               </p>
+               
                <hr>
                <div class="panel panel-default">
                   <div class="panel-heading" id="maintitle"><a href="">What is Mobike?</a></div>
@@ -54,7 +54,7 @@
                <hr>
             </div>
          </div>
-      </div>
+      
       <script type="text/javascript">
          function logout(){
             	gapi.auth.signOut();
