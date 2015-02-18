@@ -1,9 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+   pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
+	
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Create Event...</title>
+		<title>Event details...</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -15,55 +19,56 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script src="../js/loadgpx.js" type="text/javascript"></script>
-       	<script>
-       		function apri(url) {
-       			newin = window.open(url,'Route Preview', 'scrollbars=yes,resizable=yes,width=600,height=600,toolbar=no');
-       		}
-       	
-       	</script>
-       	<script>
-       	var id = document.getElementById("id");
-	
-		$.makeTable = function (mydata) {
-		    var table = $('<table>');
-	    	var tblHeader = "<tr>";
-	    	for (var k in mydata[0]) if(k!="url"){ tblHeader += "<th>" + k + "</th>";}
-	    	tblHeader += "</tr>";
-	    	$(tblHeader).appendTo(table);
-	    	$.each(mydata, function (index, value) {
-		        var TableRow = "<tr>";
-	        	$.each(value, function (key, val) {
-		        	if(key=="id"){
-			        	TableRow += "<td><input type=\"radio\" name=\"routeId\" value=\""+val+"\"><a href=\"javascript:apri(\'http://mobike.ddns.net/WAPP/itineraries/"+val+"\');\">"+val+"</a></td>";
-			    	}
-		        	else {
-			        	if(key!="url"){
-	        			TableRow += "<td>" + val + "</td>";}
-	        		}
-		        	
-	        	});
-	        	TableRow += "</tr>";
-	        	$(table).append(TableRow);
-	    	});
-	    	return ($(table));
-		};
-		
-		
-		
-		$(document).ready(function(){
-			  	var urir = "http://mobike.ddns.net/WAPP/getitineraries";
-		    	$.getJSON(urir,function(result){
-		   		var mydata = result;
-				var table = $.makeTable(mydata);
-		$(table).appendTo("#tableFromJson");
-		    	});
-			  
-		});
-		    
-	</script>
+        <script type="text/javascript">
+            
+        		var eid = ${it.get('id')} 
+        		
        
+
+            function loadGPXFileIntoGoogleMap(map, filename) {
+                $.ajax({url: filename,
+                    dataType: "xml",
+                    success: function(data) {
+                      var parser = new GPXParser(data, map);
+                      parser.setTrackColour("#ff0000");     // Set the track line colour
+                      parser.setTrackWidth(5);          // Set the track line width
+                      parser.setMinTrackPointDelta(0.001);      // Set the minimum distance between track points
+                      parser.centerAndZoom(data);
+                      parser.addTrackpointsToMap();         // Add the trackpoints
+                      parser.addWaypointsToMap();           // Add the waypoints
+                    }
+                });
+            }
+
+            
+               
+            $(document).ready(function(){
+                						var jsonuri = "http://mobike.ddns.net/WAPP/getEventById/"+eid;
+                						$.getJSON(jsonuri,function(result){
+                							$.each(result, function(i, field){
+                								if(i=="routeId"){
+                								getgpx(field);	
+                								}
+                								$("#jsonpanel").append("<b><color=#168ccc>"+i+": </b></color>" + field + "    ");
+                														   });
+            							});
+            });
+            
+            function getgpx(rid) {
+                var mapOptions = {
+                  zoom: 8,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById("map"),
+                    mapOptions);
+                loadGPXFileIntoGoogleMap(map, "http://mobike.ddns.net/SRV/routes/retrieve/"+rid+"/gpx"); };
+               
+</script>
+
 	</head>
 	<body>
+	<div id="eventoid" style="display:none">${it.id}</div>
+	        
 	<div id="ciao"></div>
 <!-- begin template -->
 <div class="navbar navbar-custom navbar-fixed-top">
@@ -104,33 +109,15 @@
   <div class="row">
   	<div class="col-xs-8" id="left">
     
-      <h2>New Event:</h2>
+      <h2>Event and Route Info</h2>
        
       <hr>
       
    	<div class="panel panel-default">
-        <div class="panel-heading"><b>Insert Event Details:</b></div>
-        <hr>
-        <hr>
-        
-        <form action="insertnew" method="POST">
-        	<div class="cnt">
-        	<b>Name:</b><input type="text" name="name"><br>
-        	<b>Description:</b><input type="text" name="description"><br>
-        	<b>Start Date:</b><input type="date" name="date"><br> 
-        	<b>Start Time:</b><input type="time" name="time"><br>
-        	<b>Start Location:</b><input type="text" name="startLocation"><br>   
-        	<br>  
-        	</div>
-        	<div class="datagrid" id="tableFromJson" align="center"></div>
-        	
-        	
-        	<input class="myButton" type="submit" value="Submit!">
-        </form>
-        
-        
+        <div class="panel-heading" id="jsonpanel"><b>EVENT DETAILS <br><br></b></div>
       </div>
       <p></p>
+      <div id="map" style="width: 100%; height: 100%;"></div>
       <p>&nbsp;</p>
       
       <hr>

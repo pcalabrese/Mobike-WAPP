@@ -239,3 +239,9 @@ div.dhtmlx_window_active, div.dhx_modal_cover_dv {
 	position:relative;
 	top:1px;
 }
+
+
+.cnt { width: 200px; clear: both; margin-left: 15px } 
+.cnt input { width: 100%; clear: both; }
+
+

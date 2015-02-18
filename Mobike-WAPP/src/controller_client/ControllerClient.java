@@ -19,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -173,9 +174,11 @@ public class ControllerClient {
 	
 	@GET
 	@Path("/events/{id}")
-	@Produces(MediaType.TEXT_HTML)
-	public Viewable eventId(@PathParam("id") long id){
-		return new Viewable("/eventdetail.jsp",null);
+	@Produces("text/html")
+	public Response eventId(@PathParam("id") long id){
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("id",String.valueOf(id));
+		return Response.ok(new Viewable("/eventdetail.jsp",map)).build();
 	}
 	
 	@GET
@@ -187,25 +190,28 @@ public class ControllerClient {
 	
 	@POST
 	@Path("/events/insertnew")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String insertNew(@FormParam("name")String name, @FormParam("description") String description, 
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces("text/html")
+	public Response insertNew(@FormParam("name")String name, @FormParam("description") String description, 
 							@FormParam("date") String date, @FormParam("time") String time, 
 							@FormParam("startLocation") String startLocation, @FormParam("routeId") String routeId,@Context HttpServletRequest req){
 		
 		HttpSession session = req.getSession();
 		@SuppressWarnings("unchecked")
 		Map<String,String> user = (Map<String, String>) session.getAttribute("user");
-		String id  = user.get("id");
+		String creatorId  = user.get("id");
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date currentDate = new Date();
 		String creationDate = dateFormat.format(currentDate);
 		String dateTime = date + " " + time + ":00";
 		
-		String json = "Event [id=" + id + ", name=" + name + ", description=" + description + ", routeId=" + routeId +", startDate=" + dateTime +
-				", startLocation=" + startLocation +", creationDate=" + creationDate + "]";
+		String json = "{\"creatorId\"=\"" + creatorId + "\", \"name\"=\"" + name + "\", \"description\"=\"" + description + "\", \"routeId\"=\"" + routeId +"\", \"startDate\"=\"" + dateTime +
+				"\", \"startLocation\"=\"" + startLocation +"\", \"creationDate\"=\"" + creationDate + "\"}";
 		
 		ClientResponse response = wr.path("/events").path("/create").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
 		String output = response.getEntity(String.class);
-		return output;
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("id",output);
+		return Response.ok(new Viewable("/eventdetail.jsp",map)).build();
 	}
 }
