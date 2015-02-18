@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -32,8 +33,8 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="home">Home</a></li>
         <li><a href="itineraries">Itineraries</a></li>
-        <li><a href="aboutus">About Us</a></li>
         <li><a href="events">Events</a></li>
+        <li><a href="aboutus">About Us</a></li>
         <li>&nbsp;</li>
       </ul>
       <form class="navbar-form">
@@ -53,7 +54,7 @@
             <input type="text" class="form-control" placeholder="Search for routes (under development)">
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
             <input type="button" class="myButton" value="Logout" onclick="logout()" style="vertical-align: middle; text-align:right; float:right;"/>
-            
+            <div class="nameCnt">Logged in as: ${user.name}</div>
           </div>
         </div>
       </form>
@@ -74,7 +75,7 @@
        <hr>
       <p id="maintext">Mobike is an app to create, share and discover routes for motorcycle enthusiasts!    <br> Record your trip with our mobile app and share it with your friends, browse uploaded itineraries available on the website </p>
    	<br>
-   		<div id="profile">Nome: ${user.name} Cognome: ${user.surname} Email: ${user.email} Id: ${user.id}</div>
+   		
    	
    	</br>
    	<br></br>
@@ -91,7 +92,7 @@
  
 	<script type="text/javascript">
 		function logout(){
-			alert("bottone premuto");
+			
 			$.ajax({
 		        	type: "GET",
 		        	url: "/WAPP/logout",

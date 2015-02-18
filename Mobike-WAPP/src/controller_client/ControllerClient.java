@@ -56,13 +56,13 @@ public class ControllerClient {
 	@GET
 	@Path("/itineraries")
 	public Viewable itineraries(){
-		return new Viewable("/itineraries.html", "itineraries");
+		return new Viewable("/itineraries.jsp", null);
 	}
 	
 	@GET
 	@Path("/aboutus")
 	public Viewable aboutus(){
-		return new Viewable("/aboutus.html", "aboutus");
+		return new Viewable("/aboutus.jsp", null);
 	}
 	
 	@GET
@@ -85,7 +85,7 @@ public class ControllerClient {
 	@GET
 	@Path("/itineraries/{id}")
 	public Viewable itineraryDetails(@PathParam ("id") long id){
-		return new Viewable("/itinerarydetail.html", "details");
+		return new Viewable("/itinerarydetail.jsp", null);
 	}
 	@GET
 	@Path("/itntest")

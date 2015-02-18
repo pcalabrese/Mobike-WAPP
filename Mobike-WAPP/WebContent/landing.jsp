@@ -43,8 +43,9 @@
                </div>
                   <hr>
                   <hr>
-                  <p id="maintext">Mobike is an app to create, share and discover routes for motorcycle enthusiasts!    <br> Record your trip with our mobile app and share it with your friends, browse uploaded itineraries available on the website </p>
-               </div>
+                  <p id="maintext">Mobike is an app to create, share and discover routes for motorcycle enthusiasts!    <br> Record your trip with our mobile app and share it with your friends, browse uploaded itineraries available on the website <br><br> <a href="http://mobike.ddns.net/app-debug.apk" class="myButton">MOBILE APP DOWNLOAD</a></p>
+               	  
+               
                <hr>
                <hr>
            
@@ -52,6 +53,7 @@
                   <a href="https://sites.google.com/a/dis.uniroma1.it/google-technologies-for-cloud-and-web-development/" target="_ext" class="center-block btn btn-primary">Google Workshop for Cloud and Web Development</a>
                </p>
                <hr>
+               </div>
             </div>
          </div>
       

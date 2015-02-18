@@ -63,11 +63,10 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="home">Home</a></li>
-        <li><a href="itineraries">Itineraries</a></li>
-        <li class="active"><a href="events">Events</a>
-        <li><a href="aboutus">About Us</a></li>
-        
+        <li><a href="/WAPP/home">Home</a></li>
+        <li><a href="/WAPP/itineraries">Itineraries</a></li>
+        <li class="/WAPP/active"><a href="events">Events</a></li>
+        <li><a href="/WAPP/aboutus">About Us</a></li>
         <li>&nbsp;</li>
       </ul>
       <form class="navbar-form">
@@ -83,8 +82,11 @@
                 <li><a href="#">Category 5</a></li> 
               </ul>
             </div>
+            
             <input type="text" class="form-control" placeholder="Search for routes (under development)">
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+            <input type="button" class="myButton" value="Logout" onclick="logout()" style="vertical-align: middle; text-align:right; float:right;"/>
+            <div class="nameCnt">Logged in as: ${user.name}</div>
           </div>
         </div>
       </form>
@@ -101,7 +103,9 @@
      
       <p>
       
-      
+      <div align="left">
+   			 <a class="myButton" href="/WAPP/events/new">New!</a>
+      </div>
       <div class="datagrid" id="tableFromJson" align="center"></div></p>
       
       <hr>
@@ -117,6 +121,20 @@
   
   </div>
 </div>
-
+	<script type="text/javascript">
+		function logout(){
+			
+			$.ajax({
+		        	type: "GET",
+		        	url: "/WAPP/logout",
+		        	data: "",
+		        	contentType: "text/plain",
+		        	dataType: "text",
+		        	success: function(data){window.location=data},
+		        	failure: function(errMsg) {alert(errMsg);},
+		        	error: function(asd, text, wetr){alert(text);}
+		  	});
+    	}
+	</script>
 	</body>
 </html>
