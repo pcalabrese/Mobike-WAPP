@@ -43,7 +43,10 @@
                </div>
                   <hr>
                   <hr>
-                  <p id="maintext">Mobike is an app to create, share and discover routes for motorcycle enthusiasts!    <br> Record your trip with our mobile app and share it with your friends, browse uploaded itineraries available on the website <br><br> <a href="http://mobike.ddns.net/app-debug.apk" class="myButton">MOBILE APP DOWNLOAD</a></p>
+                  <p id="maintext">Mobike is an app to create, share and discover routes for motorcycle enthusiasts!    
+                  <br> Record your trip with our mobile app and share it with your friends, browse uploaded itineraries available on the website <br><br> 
+                  <a href="http://mobike.ddns.net/app-debug.apk" class="myButton">ANDROID APP DOWNLOAD</a></p>
+               	 
                	  
                
                <hr>
