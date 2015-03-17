@@ -59,8 +59,8 @@ import com.sun.jndi.toolkit.url.Uri;
 @Path("/")
 public class ControllerClient {
 
-	private static final String BaseURI = "http://mobike.ddns.net/SRV/";
-	private final String BaseWebAppUri = "http://mobike.ddns.net/WAPP/";
+	private static final String BaseURI = "http://localhost:8080/Mobike-SRV/";
+	private final String BaseWebAppUri = "http://localhost:8080/Mobike-WAPP/";
 
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
@@ -78,9 +78,38 @@ public class ControllerClient {
 	}
 
 	@GET
+	@SuppressWarnings("unchecked")
 	@Path("/home")
-	public Viewable home() {
-		return new Viewable("/index.jsp", null);
+	public Response home(@CookieParam("token") String userToken) {
+
+		if (userToken != null) {
+			Crypter crypter = new Crypter();
+			String plainJson = null;
+			try {
+				plainJson = crypter.decrypt(userToken);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			ObjectMapper mapper = new ObjectMapper();
+
+			Map<String, String> map = null;
+			try {
+				map = (Map<String, String>) mapper.readValue(plainJson,
+						Map.class);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String nickname = map.get("nickname");
+
+			Map<String, String> outputMap = new HashMap<String, String>();
+			outputMap.put("nickname", nickname);
+			return Response.ok(new Viewable("/index.jsp", outputMap)).build();
+		} else {
+			return Response.ok(new Viewable("/landing.jsp", null)).build();
+		}
+
 	}
 
 	@GET
@@ -121,7 +150,6 @@ public class ControllerClient {
 		return new Viewable("/itinerarydetail.jsp", null);
 	}
 
-	
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -156,15 +184,13 @@ public class ControllerClient {
 
 	@GET
 	@Path("/logout")
-	@Consumes(MediaType.TEXT_PLAIN)
-	public String logout(@Context HttpServletRequest req) {
-		HttpSession session = req.getSession();
-
-		if (session != null) {
-			session.removeAttribute("user");
-		}
-
-		return "/WAPP/landing";
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response logout() {
+		Cookie cookie = new Cookie("token", "");
+		
+		NewCookie newCookie = new NewCookie(cookie, null, 0, false);
+		
+		return Response.ok(this.BaseWebAppUri.concat("landing")).cookie(newCookie).build();
 	}
 
 	@GET
@@ -258,14 +284,14 @@ public class ControllerClient {
 		if (userToken != null) {
 			System.out.println("entered 1st if");
 			ClientResponse response = wr.path("/users").path("/auth")
-					.type(MediaType.APPLICATION_JSON)
-					.post(ClientResponse.class, userToken);
-
+					.queryParam("token", userToken).get(ClientResponse.class);
+			System.out.println(response.getStatus());
 			if (response.getStatus() == 200)
 				return Response.ok(this.BaseWebAppUri.concat("home")).build();
 			else {
+				NewCookie cookie = null;
 				return Response.ok(this.BaseWebAppUri.concat("landing"))
-						.build();
+						.cookie(cookie).build();
 			}
 
 		}
@@ -333,23 +359,44 @@ public class ControllerClient {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			ClientResponse response = wr.path("/users").path("/auth").post(ClientResponse.class,cryptedJson);
-			
-			if(response.getStatus()==200){
+
+			ClientResponse response = wr.path("/users").path("/auth").queryParam("token", cryptedJson).get(ClientResponse.class);
+
+			if (response.getStatus() == 200) {
 				String token = response.getEntity(String.class);
-				return Response.ok(BaseWebAppUri.concat("home")).cookie(new NewCookie("token",token)).build();
+				ObjectMapper mapmapper = new ObjectMapper();
+				Map<String, String> map = null;
+
+				try {
+					map = mapmapper.readValue(token, Map.class);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				return Response.ok(BaseWebAppUri.concat("home"))
+						.cookie(new NewCookie("token", map.get("user")))
+						.build();
 			}
-			
-			//costruire parte else in cui, se il codice restituito dal server è 401 allora salva come cookie i dati con una chiave diversa,
-			//bisogna poi chiedere all'utente di inserire il nickname e provare la post, se fallisce chiedere di modificare i dati.
-			// l'inserimento del nickname potrebbe essere fatto in una richiesta asincrona AJAX.
-			
+
+			// costruire parte else in cui, se il codice restituito dal server è
+			// 401 allora salva come cookie i dati con una chiave diversa,
+			// bisogna poi chiedere all'utente di inserire il nickname e provare
+			// la post, se fallisce chiedere di modificare i dati.
+			// l'inserimento del nickname potrebbe essere fatto in una richiesta
+			// asincrona AJAX.
+
 			else {
-				String token = "";
-				return Response.ok(BaseWebAppUri.concat("landing")).cookie(new NewCookie("token",token)).build();
+				if (response.getStatus() == 401) {
+					String tokentemp = cryptedJson;
+					return Response.status(401)
+							.cookie(new NewCookie("tokentemp", tokentemp))
+							.build();
+				} else {
+					NewCookie cookie = null;
+					return Response.status(400).cookie(cookie).build();
+				}
 			}
-			
 
 		}
 

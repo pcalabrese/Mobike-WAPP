@@ -54,7 +54,7 @@
             <input type="text" class="form-control" placeholder="Search for routes (under development)">
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
             <input type="button" class="myButton" value="Logout" onclick="logout()" style="vertical-align: middle; text-align:right; float:right;"/>
-            <div class="nameCnt">Logged in as: ${user.name}</div>
+            <div class="nameCnt">Logged in as: ${it.nickname}</div>
           </div>
         </div>
       </form>
@@ -92,10 +92,9 @@
  
 	<script type="text/javascript">
 		function logout(){
-			
 			$.ajax({
 		        	type: "GET",
-		        	url: "/WAPP/logout",
+		        	url: "/Mobike-WAPP/logout",
 		        	data: "",
 		        	contentType: "text/plain",
 		        	dataType: "text",
