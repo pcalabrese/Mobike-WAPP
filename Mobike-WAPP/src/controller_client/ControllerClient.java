@@ -1,14 +1,8 @@
 package controller_client;
 
 import java.util.Date;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.math.BigInteger;
-import java.net.URI;
-import java.security.SecureRandom;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
@@ -28,33 +21,30 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
 import utils.Crypter;
 
-import com.google.api.client.auth.oauth2.TokenResponseException;
 import com.google.api.client.googleapis.auth.oauth2.*;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson.JacksonFactory;
 import com.google.api.services.oauth2.Oauth2;
 import com.google.api.services.oauth2.model.Tokeninfo;
 import com.google.api.services.oauth2.model.Userinfoplus;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.view.Viewable;
-import com.sun.jndi.toolkit.url.Uri;
 
 @Path("/")
 public class ControllerClient {
@@ -67,14 +57,14 @@ public class ControllerClient {
 
 	@GET
 	public Viewable welcome() {
-		return new Viewable("/index.jsp", null);
+		return new Viewable("/landing.jsp", null);
 	}
 
 	@GET
 	@Path("/landing")
 	public Response landing(@Context HttpServletRequest request) {
 
-		return Response.ok(new Viewable("/landing2.jsp")).build();
+		return Response.ok(new Viewable("/landing.jsp")).build();
 	}
 
 	@GET
@@ -150,47 +140,17 @@ public class ControllerClient {
 		return new Viewable("/itinerarydetail.jsp", null);
 	}
 
-	@POST
-	@Path("/login")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public String login(String json, @Context HttpServletRequest req) {
-		// inizializzo Gson
-		Gson gson = new GsonBuilder().create();
-		// Converto il json in un oggetto Properties
-		Properties pr = gson.fromJson(json, Properties.class);
-
-		String id = null;
-		ClientResponse response = wr.path("/users").path("/auth")
-				.type(MediaType.APPLICATION_JSON)
-				.post(ClientResponse.class, json);
-		id = response.getEntity(String.class);
-
-		// Prendo la sessione e aggiungo i dati dell'utente in una HashMap User
-		HttpSession session = req.getSession(true);
-		Map<String, String> user = new HashMap<String, String>();
-		user.put("name", pr.getProperty("name"));
-		user.put("surname", pr.getProperty("surname"));
-		user.put("email", pr.getProperty("email"));
-		if (id != null)
-			user.put("id", id);
-
-		// setto la HashMap come attributo della sessione
-		session.setAttribute("user", user);
-
-		// restituisco la URL a cui reindirizzare il browser
-		return "/WAPP/home";
-	}
-
 	@GET
 	@Path("/logout")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response logout() {
+	public Response logout(@Context HttpServletRequest request) {
+		request.getSession().invalidate();
 		Cookie cookie = new Cookie("token", "");
-		
+
 		NewCookie newCookie = new NewCookie(cookie, null, 0, false);
-		
-		return Response.ok(this.BaseWebAppUri.concat("landing")).cookie(newCookie).build();
+
+		return Response.ok(this.BaseWebAppUri.concat("landing"))
+				.cookie(newCookie).build();
 	}
 
 	@GET
@@ -271,6 +231,7 @@ public class ControllerClient {
 		return Response.ok(new Viewable("/eventdetail.jsp", map)).build();
 	}
 
+	@SuppressWarnings("unchecked")
 	@POST
 	@Path("/connect")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -322,6 +283,9 @@ public class ControllerClient {
 				Oauth2 oauth2 = new Oauth2.Builder(TRANSPORT, JSON_FACTORY,
 						credential).setApplicationName("mobike").build();
 
+				request.getSession().setAttribute("googletoken",
+						tokenResponse.toString());
+
 				@SuppressWarnings("unused")
 				Tokeninfo tokenInfo = oauth2.tokeninfo()
 						.setAccessToken(credential.getAccessToken()).execute();
@@ -360,7 +324,8 @@ public class ControllerClient {
 				e.printStackTrace();
 			}
 
-			ClientResponse response = wr.path("/users").path("/auth").queryParam("token", cryptedJson).get(ClientResponse.class);
+			ClientResponse response = wr.path("/users").path("/auth")
+					.queryParam("token", cryptedJson).get(ClientResponse.class);
 
 			if (response.getStatus() == 200) {
 				String token = response.getEntity(String.class);
@@ -368,7 +333,8 @@ public class ControllerClient {
 				Map<String, String> map = null;
 
 				try {
-					map = mapmapper.readValue(token, Map.class);
+					map = (Map<String, String>) mapmapper.readValue(token,
+							Map.class);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -401,4 +367,51 @@ public class ControllerClient {
 		}
 
 	}
+
+	@POST
+	@Path("/disconnect")
+	public Response disconnectServer(@Context HttpServletRequest request) {
+
+		
+
+		String tokenData = (String) request.getSession().getAttribute(
+				"googletoken");
+
+		HttpTransport TRANSPORT = new NetHttpTransport();
+		JacksonFactory JSON_FACTORY = new JacksonFactory();
+		String CLIENT_ID = "648355147327-l29pdutihnfa25kdmo1ocjankqg4217c.apps.googleusercontent.com";
+		String CLIENT_SECRET = "kFPvMH88ifFkbKYnsFsPq5Me";
+
+		try {
+		GoogleCredential credential = new GoogleCredential.Builder()
+				.setJsonFactory(JSON_FACTORY)
+				.setTransport(TRANSPORT)
+				.setClientSecrets(CLIENT_ID, CLIENT_SECRET)
+				.build()
+				.setFromTokenResponse(
+						JSON_FACTORY.fromString(tokenData,
+								GoogleTokenResponse.class));
+
+		HttpResponse revokeResponse = TRANSPORT
+				.createRequestFactory()
+				.buildGetRequest(
+						new GenericUrl(
+								String.format(
+										"https://accounts.google.com/o/oauth2/revoke?token=%s",
+										credential.getAccessToken())))
+				.execute();
+
+		request.getSession().removeAttribute("googletoken");
+		Cookie cookie = new Cookie("token", "");
+		NewCookie newCookie = new NewCookie(cookie, null, 0, false);
+		return Response.ok(this.BaseWebAppUri.concat("landing"))
+				.cookie(newCookie).build();
+		}
+		catch (IOException e) {
+	          // For whatever reason, the given token was invalid.
+	          return Response.status(400).entity("Failed to revoke token for given user.").build();
+		}
+
+	}
+
 }
