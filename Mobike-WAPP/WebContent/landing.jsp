@@ -106,10 +106,8 @@
 			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
-	</div>
-	</div>
-
-	<div class="carousel-caption">
+		
+		<div class="carousel-caption">
 
 
 		<button class="g-signin"
@@ -124,40 +122,36 @@
 
 
 	</div>
+	</div>
+	</div>
+
+	
 	<!-- myCarousel--->
 
 	<!-- ******FEATURESNEW****** -->
 	<section id="features" class="features section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 text-center">
-					<img class="img-circle" src="http://placehold.it/140x140">
-					<h2>Mobile-first</h2>
-					<p>Tablets, phones, laptops. The new 3 promises to be mobile
-						friendly from the start.</p>
-				</div>
-				<!-- coloumn-->
-
-				<div class="col-md-4 text-center">
-					<img class="img-circle" src="http://placehold.it/140x140">
-					<h2>One Fluid Grid</h2>
-					<p>There is now just one percentage-based grid for Bootstrap 3.
-						Customize for fixed widths.</p>
-				</div>
-				<!-- coloumn-->
-
-				<div class="col-md-4 text-center">
-					<img class="img-circle" src="http://placehold.it/140x140">
-					<h2>LESS is More</h2>
-					<p>Improved support for mixins make the new Bootstrap 3 easier
-						to customize.</p>
-				</div>
-				<!-- coloumn-->
-			</div>
-			<!-- row-->
-		</div>
-		<!--//container-->
-	</section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <img  src="./img/map.png">
+        <h2>Expand your ways</h2>
+        <p>Give more space to your rides, create and share events with our community.</p>
+      </div><!-- coloumn-->
+                    
+      <div class="col-md-4 text-center">
+        <img class="img-circle" src="./img/event.png">
+        <h2>Organize the Passion</h2>
+        <p>With an intuitive way to create and join events, every weekend will be memorable.</p>
+      </div><!-- coloumn-->
+                
+      <div class="col-md-4 text-center">
+        <img src="./img/Android.png">
+        <h2>Always with you</h2>
+        <p>A user-friendly app, so you will never brake your enthusiasm.</p>
+      </div><!-- coloumn-->
+    </div><!-- row-->
+  </div><!--//container-->
+</section>
 	<!--//features-->
 
 	<hr style="margin: 1px 0;">
@@ -176,7 +170,7 @@
 					<div class="col-xs-4"></div>
 					<div class="col-xs-4">
 						<div class="text-center">
-							<a href="#"><img class="img-rounded"
+							<a href="./img/app-debug.apk"><img class="img-rounded"
 								style="width: 175px; height: 80px; padding-top: 20px;"
 								src="./img/androidown.png"></a>
 						</div>
