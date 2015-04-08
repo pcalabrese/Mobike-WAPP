@@ -17,15 +17,12 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Global CSS -->
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+ <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
 <!-- devAid Theme CSS -->
 <link id="theme-style" rel="stylesheet" href="./css/stiledev.css">
 <!-- Include material.css to include the theme and ripples.css to style the ripple effect -->
 <link href="./css/material.min.css" rel="stylesheet">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Roboto:500,400'
 	rel='stylesheet' type='text/css'>
 
@@ -123,7 +120,7 @@
 
 	</div>
 	</div>
-	</div>
+	
 
 	
 	<!-- myCarousel--->

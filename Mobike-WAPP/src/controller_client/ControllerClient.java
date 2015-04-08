@@ -152,6 +152,12 @@ public class ControllerClient {
 	}
 	
 	@GET
+	@Path("/new_landing")
+	public Viewable newlanding(){
+		return new Viewable("/new_landing.html", null);
+	}
+	
+	@GET
 	@Path("/events")
 	@Produces(MediaType.TEXT_HTML)
 	public Response events(@CookieParam("token") String userToken) {
@@ -712,6 +718,12 @@ public class ControllerClient {
 		
 		
 		
+	}
+	
+	@GET
+	@Path("/androidapp")
+	public Response androidapp(){
+		return Response.ok(new Viewable("/androidapp.jsp",null)).build();
 	}
 
 }
