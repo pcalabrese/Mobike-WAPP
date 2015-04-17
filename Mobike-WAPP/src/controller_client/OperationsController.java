@@ -2,11 +2,8 @@ package controller_client;
 
 import java.util.Date;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,10 +11,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.FormParam;
@@ -26,7 +21,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
@@ -50,17 +44,14 @@ import com.google.api.services.oauth2.Oauth2;
 import com.google.api.services.oauth2.model.Tokeninfo;
 import com.google.api.services.oauth2.model.Userinfoplus;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.view.Viewable;
 
 
 @Path("/ops")
 public class OperationsController {
 
-	private static final String BaseURI = "http://mobike.ddns.net/SRV/";
+	private static final String BaseURI = "http://localhost:8080/Mobike-SRV/";
 	private final String BaseWebAppUri = "http://localhost:8080/Mobike-WAPP/";
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
@@ -75,6 +66,7 @@ public class OperationsController {
 		// check if user is logged, check if it's authorization is valid and
 		// then redirect browser.
 		if (userToken != null) {
+			System.out.println("userToken !=NULL :"+ userToken);
 			ClientResponse response = wr.path("/users").path("/auth").queryParam("token", userToken).get(ClientResponse.class);
 			
 			if (response.getStatus() == 200)
@@ -87,6 +79,7 @@ public class OperationsController {
 		}
 		// initiate the Google Authentication Flow.
 		else {
+			System.out.println("userToken == null : starting G auth.");
 			String code = x;
 			HttpTransport TRANSPORT = new NetHttpTransport();
 			JacksonFactory JSON_FACTORY = new JacksonFactory();
@@ -162,8 +155,9 @@ public class OperationsController {
 					
 					e.printStackTrace();
 				}
-
-				return Response.ok(BaseWebAppUri.concat("home")).cookie(new NewCookie("token", map.get("user"))).build();
+				System.out.println("token:" + map.get("user"));
+				NewCookie cookie = new NewCookie("token",map.get("user"),"/","","comment",3600,false);
+				return Response.ok(BaseWebAppUri.concat("home")).cookie(cookie).build();
 			}
 
 			else {

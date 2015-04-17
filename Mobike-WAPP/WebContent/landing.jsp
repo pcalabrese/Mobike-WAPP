@@ -9,65 +9,32 @@
 <!--<![endif]-->
 
 <head>
-<title>MoBike - Landing</title>
-<!-- Meta -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<!-- Global CSS -->
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<!-- devAid Theme CSS -->
-<link id="theme-style" rel="stylesheet" href="./css/stiledev.css">
-<!-- Include material.css to include the theme and ripples.css to style the ripple effect -->
-<link href="./css/material.min.css" rel="stylesheet">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css"
-	rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Roboto:500,400'
-	rel='stylesheet' type='text/css'>
-
-<!-- BEGIN Pre-requisites -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+	<title>MoBike - Landing</title>
 	
-</script>
-<script type="text/javascript">
-	(function() {
-		var po = document.createElement('script');
-		po.type = 'text/javascript';
-		po.async = true;
-		po.src = 'https://plus.google.com/js/client:plusone.js?onload=start';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(po, s);
-	})();
-</script>
-<script src="./js/login.js"></script>
-<!-- END Pre-requisites -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link id="theme-style" rel="stylesheet" href="./css/stiledev.css">
+	<link href="./css/material.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css"	rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:500,400' rel='stylesheet' type='text/css'>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/ripples.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
 
+	<script src="./js/landing.js"></script>
 </head>
 
 <body data-spy="scroll" onLoad="window.scroll(0, 150)">
 	<div class="container-fluid">
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-responsive-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand scrollto" href="#promo"> <img
-					src="./img/logo.png" class="img-responsive" alt="MoBike"></a>
-			</div>
-
-			<div class="navbar-collapse collapse navbar-responsive-collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="./contactlanding.html">Contact</a></li>
-
-				</ul>
-			</div>
-		</nav>
+		<navbar>
+		</navbar>
 	</div>
 	<!-- Carousel -->
 	<!-- Wrapper for slides -->
@@ -118,7 +85,7 @@
         data-redirecturi="postmessage"
         data-theme="dark"
         data-cookiepolicy="single_host_origin">
-    </button>
+    	</button>
 
 
 	</div>
@@ -213,26 +180,6 @@
 		<!--//container-->
 	</footer>
 	<!--//footer-->
-
-
-
-
-
-
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/ripples.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			// This command is used to initialize some elements and make them work properly
-			$.material.init();
-		});
-	</script>
+	
 </body>
 </html>

@@ -22,13 +22,16 @@ public class CookieFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 
 		System.out.println(((HttpServletRequest) request).getRequestURI());
+		
 
 		String uri = ((HttpServletRequest) request).getRequestURI();
 
 		Cookie[] cookies = ((HttpServletRequest) request).getCookies();
 		if (cookies != null) {
+			
 			for (Cookie ck : cookies) {
 				if ("token".equals(ck.getName())) {
+					
 					chain.doFilter(request, response);
 					return;
 				}
