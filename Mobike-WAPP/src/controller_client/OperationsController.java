@@ -61,7 +61,7 @@ import com.sun.jersey.api.view.Viewable;
 public class OperationsController {
 
 	private static final String BaseURI = "http://mobike.ddns.net/SRV/";
-	private final String BaseWebAppUri = "http://mobike.ddns.net/WAPP/";
+	private final String BaseWebAppUri = "http://localhost:8080/Mobike-WAPP/";
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
 	

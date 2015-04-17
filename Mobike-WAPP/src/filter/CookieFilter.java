@@ -48,26 +48,29 @@ public class CookieFilter implements Filter {
 		} else if (uri.indexOf("landing") > 0) {
 			chain.doFilter(request, response);
 			return;
-		} else if (uri.indexOf("connect") > 0) {
+		} else if (uri.indexOf("/ops/connect") > 0) {
 			chain.doFilter(request, response);
 			return;
 		} else if (uri.indexOf("/fonts") > 0) {
 			chain.doFilter(request, response);
 			return;
-		} else if (uri.indexOf("createuser") >0) {
+		} else if (uri.indexOf("/ops/createuser") >0) {
+			chain.doFilter(request, response);
+			return;
+		} else if (uri.indexOf("/test") > 0 ){
 			chain.doFilter(request, response);
 			return;
 		}
 		
-		((HttpServletResponse) response).sendRedirect("http://mobike.ddns.net/WAPP/landing");
+		((HttpServletResponse) response).sendRedirect("http://localhost:8080/Mobike-WAPP/landing");
 
 		
 
 	}
 
 	public void init(FilterConfig config) throws ServletException {
-		this.blankurls.add("/WAPP/landing");
-		this.blankurls.add("/WAPP/connect");
+		this.blankurls.add("/Mobike-WAPP/landing");
+		this.blankurls.add("/Mobike-WAPP/connect");
 	}
 
 	public void destroy() {

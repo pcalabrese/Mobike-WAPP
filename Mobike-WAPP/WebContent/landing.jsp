@@ -17,12 +17,15 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Global CSS -->
- <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <!-- devAid Theme CSS -->
 <link id="theme-style" rel="stylesheet" href="./css/stiledev.css">
 <!-- Include material.css to include the theme and ripples.css to style the ripple effect -->
 <link href="./css/material.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css" rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css"
+	rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Roboto:500,400'
 	rel='stylesheet' type='text/css'>
 
@@ -115,12 +118,12 @@
         data-redirecturi="postmessage"
         data-theme="dark"
         data-cookiepolicy="single_host_origin">
-    	</button>
+    </button>
 
 
 	</div>
 	</div>
-	
+	</div>
 
 	
 	<!-- myCarousel--->
@@ -167,7 +170,7 @@
 					<div class="col-xs-4"></div>
 					<div class="col-xs-4">
 						<div class="text-center">
-							<a href="./img/app-debug.apk"><img class="img-rounded"
+							<a href="../downloads/app/app-debug.apk"><img class="img-rounded"
 								style="width: 175px; height: 80px; padding-top: 20px;"
 								src="./img/androidown.png"></a>
 						</div>
@@ -217,10 +220,14 @@
 
 
 
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/ripples.min.js"></script>
-	<script	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/ripples.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			// This command is used to initialize some elements and make them work properly

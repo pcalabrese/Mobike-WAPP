@@ -199,8 +199,8 @@
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Write a Review</h4>
    </div>
-   </form>
-   </fieldset>
+   <form>
+   <fieldset>
    <div id="mod-body" class="modal-body">
         <div class="form-group">
         <br>
@@ -223,12 +223,12 @@
             <textarea class="form-control" rows="3" id="textreview"></textarea>
             <span class="help-block">What do you think about this Itinerary?</span>
         </div>
-    </div
+    </div>
    </div>
-   <div class="form-group>
+   <div class="form-group">
    <div id="mod-footer" class="modal-footer">
     <button type="button" class="btn btn-default shadow-level2" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary shadow-level2" <a href="javascript:recensione()">Submit</button>
+    <button type="button" class="btn btn-primary shadow-level2" click="javascript:recensione()">Submit</button>
     </div>
     </fieldset>
     </form>

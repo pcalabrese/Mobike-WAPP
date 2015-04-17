@@ -37,11 +37,13 @@ public class PagesController {
 		return Response.ok(new Viewable("/landing.jsp")).build();
 	}
 	
+	
+	
 	@GET
 	@Path("/home")
 	@Produces(MediaType.TEXT_HTML)
 	public Response home() {
-		return Response.ok(new Viewable("/landing.jsp")).build();
+		return Response.ok(new Viewable("/index.jsp")).build();
 	}
 	
 	
@@ -110,5 +112,12 @@ public class PagesController {
 	@Produces(MediaType.TEXT_HTML)
 	public Response androidapp(){
 		return Response.ok(new Viewable("/androidapp.jsp",null)).build();
+	}
+	
+	@GET
+	@Path("/test")
+	@Produces(MediaType.TEXT_HTML)
+	public Response test(){
+		return Response.ok(new Viewable("/test.jsp",null)).build();
 	}
 }

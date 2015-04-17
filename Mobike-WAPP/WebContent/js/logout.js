@@ -7,7 +7,7 @@ function logout(){
 		        	contentType: "text/plain",
 		        	dataType: "text",
 		        	success: function(data){window.location=data},
-		        	failure: function(errMsg) {alert("ciaone");},
-		        	error: function(asd, text, wetr){alert("ciaone2");}
+		        	failure: function(errMsg) {alert("Good Bye");},
+		        	error: function(asd, text, wetr){alert("Good Bye");}
 		  	});
     	}
