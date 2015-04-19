@@ -439,14 +439,18 @@ public class OperationsController {
 			String wrappedJson = mapper.writeValueAsString(map);
 			
 			ClientResponse response = wr.path("/users").path("/create").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, wrappedJson);
-			System.out.println(response.getStatus());
+			
 			if(response.getStatus()==200){
 				String token = response.getEntity(String.class);
 				ObjectMapper mapmapper = new ObjectMapper();
 				Map<String, String> map3 = null;
 				map3 = (Map<String, String>) mapmapper.readValue(token,
 						Map.class);
-				return Response.ok(BaseWebAppUri.concat("home")).cookie(new NewCookie("token", map3.get("user"))).build();
+				NewCookie cookie = new NewCookie("token",map.get("user"),"/","","comment",3600,false);
+				return Response.ok(BaseWebAppUri.concat("home")).cookie(cookie).build();
+			}
+			if(response.getStatus()==409){
+				return Response.status(409).build();
 			}
 			return Response.status(500).build();
 		} catch (Exception e3) {

@@ -907,14 +907,14 @@ color:rgba(0,0,0,.84)}
 .btn-inverse:not(.btn-link):not(.btn-flat){background-color:#3f51b5;
 color:rgba(255,255,255,.84)}
 .btn-primary:not(.btn-link):not(.btn-flat){
-background-color:#00C853 !important; /*#00c853*/
+background-color:#19b6fc !important; /*#00c853*/
 /*border: 1px solid #2196F3 !important;*/
 color:rgba(0,0,0,.84);
 font-weight:500 !important;
 }
 .btn-success:not(.btn-link):not(.btn-flat){background-color:#0f9d58;
 color:rgba(255,255,255,.84)}
-.btn-info:not(.btn-link):not(.btn-flat){/*background-color:#03a9f4;*/
+.btn-info:not(.btn-link):not(.btn-flat){background-color:#03a9f4;
 background:rgba(0, 0, 0, .3);
 color:rgba(255,255,255,.84);}
 .btn-warning:not(.btn-link):not(.btn-flat){background-color:#ff5722;
@@ -1639,7 +1639,7 @@ background-color:transparent}
 .form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{background-color:transparent}
 fieldset[disabled] .form-control:disabled,.form-control-wrapper .form-control:disabled,.form-control:disabled,fieldset[disabled] .form-control:focus:disabled,.form-control-wrapper .form-control:focus:disabled,.form-control:focus:disabled,fieldset[disabled] .form-control.focus:disabled,.form-control-wrapper .form-control.focus:disabled,.form-control.focus:disabled{border:0}
 .form-control:focus,.form-control.focus{outline:none;
-background-image:linear-gradient(#009587,#009587),linear-gradient(#d2d2d2,#d2d2d2);
+background-image:linear-gradient(#19b6fc,#19b6fc),linear-gradient(#19b6fc,#19b6fc);
 -webkit-animation:input-highlight .5s forwards;
 animation:input-highlight .5s forwards;
 box-shadow:none;

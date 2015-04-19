@@ -31,10 +31,9 @@
 	<script src="./js/landing.js"></script>
 </head>
 
-<body data-spy="scroll" onLoad="window.scroll(0, 150)">
+<body data-spy="scroll" >
 	<div class="container-fluid">
-		<navbar>
-		</navbar>
+		<navbar></navbar>
 	</div>
 	<!-- Carousel -->
 	<!-- Wrapper for slides -->
@@ -73,22 +72,14 @@
 			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
-		
+
 		<div class="carousel-caption">
 
-
-		<button class="g-signin"
-        data-scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
-        data-clientId="648355147327-l29pdutihnfa25kdmo1ocjankqg4217c.apps.googleusercontent.com"
-        data-accesstype="offline" 
-        data-callback="onSignInCallback"
-        data-redirecturi="postmessage"
-        data-theme="dark"
-        data-cookiepolicy="single_host_origin">
-    	</button>
+			<button type="button" id="login" class="btn btn-primary shadow-level3" onclick="login()" style="margin-top:">Start Here!</button>
 
 
-	</div>
+
+		</div>
 	</div>
 	</div>
 
@@ -179,7 +170,66 @@
 		</div>
 		<!--//container-->
 	</footer>
-	<!--//footer-->
 	
+	
+	<!--//footer-->
+
+	<div id="regModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title">Welcome to Mobike!</h4>
+				</div>
+				<div class="modal-body">
+					<p>Please choose a nickname and insert your Bike Model to
+						create an account</p>
+
+					<label for="inputNickname" class="col-lg-2 control-label">Nickname</label>
+					<div class="col-lg-10">
+						<input class="form-control" id="inputNickname"
+							placeholder="Nickname" type="text">
+					</div>
+
+					<label for="inputBikeModel" class="col-lg-2 control-label">Bike:</label>
+					<div class="col-lg-10">
+						<input class="form-control" id="inputBikeModel"
+							placeholder="Your Bike Model" type="text">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="regSubmit" class="btn btn-primary">Save
+						changes</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	
+	<div id="errModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title">Sorry!</h4>
+				</div>
+				<div class="modal-body">
+					<p>Authentication Failed, please reload the page and try again!</p>	
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="errSubmit" class="btn btn-primary">OK</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
 </body>
 </html>

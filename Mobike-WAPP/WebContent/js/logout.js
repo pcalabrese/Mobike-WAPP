@@ -10,4 +10,4 @@ function logout(){
 		        	failure: function(errMsg) {alert("Good Bye");},
 		        	error: function(asd, text, wetr){alert("Good Bye");}
 		  	});
-    	}
+}
