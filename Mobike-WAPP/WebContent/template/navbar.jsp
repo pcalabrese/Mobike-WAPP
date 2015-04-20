@@ -6,16 +6,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>                        
               </button>
-              <a class="navbar-brand" href="#"><img src="./img/logo.png" class="img-responsive" alt="MoBike"></a>
+              <a class="navbar-brand" href="#"><img src="/WAPP/img/logo.png" class="img-responsive" alt="MoBike"></a>
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li id="mitineraries"><a href="itineraries">Itineraries</a></li>
-              <li id="mevents"><a href="events">Events</a></li>
-              <li id="mandroidapp"><a href="androidapp">Android App</a></li>
-              <li id="mcontact"><a href="contact">Contact</a></li>
+              <li id="mitineraries"><a href="/WAPP/itineraries">Itineraries</a></li>
+              <li id="mevents"><a href="/WAPP/events">Events</a></li>
+              <li id="mandroidapp"><a href="/WAPP/androidapp">Android App</a></li>
+              <li id="mcontact"><a href="/WAPP/contacts">Contact</a></li>
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <span class="glyphicon glyphicon-user"></span> <user></user>

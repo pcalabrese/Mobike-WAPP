@@ -28,18 +28,20 @@ import utils.Crypter;
 
 
 
-import com.sun.jersey.api.client.Client;
 
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.view.Viewable;
 
 @Path("/")
 public class PagesController {
 	
-	private static final String BaseURI = "http://localhost:8080/Mobike-SRV/";
-	private final String BaseWebAppUri = "http://localhost:8080/Mobike-WAPP/";
+	private static final String BaseURI = "http://localhost:8080/SRV/";
+	private final String BaseWebAppUri = "/WAPP/";
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
+	
+	
 	
 	
 	@GET
@@ -175,10 +177,29 @@ public class PagesController {
 	}
 	
 	@GET
-	@Path("/aboutus")
+	@Path("/contacts")
 	@Produces(MediaType.TEXT_HTML)
-	public Viewable aboutus() {
-		return new Viewable("/aboutus.jsp", null);
+	public Response Contacts(@CookieParam("token") String userToken) {
+		
+		Crypter crypter = new Crypter();
+		
+		JSONObject outputOBJ = null;
+		
+		if(userToken != null){
+			System.out.println("usertoken not not null");
+			try {
+				outputOBJ = new JSONObject();
+				outputOBJ.put("user", new JSONObject(crypter.decrypt(userToken)));
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				return Response.status(500).build();
+			}
+		}
+		
+		
+		
+		return  Response.ok(new Viewable("/contacts.jsp", outputOBJ)).build();
 	}
 	
 	@GET

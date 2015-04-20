@@ -7,24 +7,24 @@
 
   
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link id="theme-style" rel="stylesheet" href="./css/stiledev.css">
-	<link href="./css/material.min.css" rel="stylesheet">
+	<link id="theme-style" rel="stylesheet" href="/WAPP/css/stiledev.css">
+	<link href="/WAPP/css/material.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css"	rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Roboto:500,400' rel='stylesheet' type='text/css'>
-	<link href="./css/jquery.nouislider.pips.min.css" rel="stylesheet">
-  	<link href="./css/jquery.nouislider.min.css" rel="stylesheet">
+	<link href="/WAPP/css/jquery.nouislider.pips.min.css" rel="stylesheet">
+  	<link href="/WAPP/css/jquery.nouislider.min.css" rel="stylesheet">
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/ripples.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
-	<script src="./js/jquery.nouislider.all.js"></script>
+	<script src="/WAPP/js/jquery.nouislider.all.js"></script>
 	
 	<script>var json = ${it};</script>
 	<script> nickname = "${it.get('user').get('nickname')}";</script>
 	
-	<script src="./js/itineraries.js"></script>
-  	<script src="./js/logout.js"></script>
+	<script src="/WAPP/js/itineraries.js"></script>
+  	<script src="/WAPP/js/logout.js"></script>
   	
   	
    

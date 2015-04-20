@@ -51,8 +51,8 @@ import com.sun.jersey.api.client.WebResource;
 @Path("/ops")
 public class OperationsController {
 
-	private static final String BaseURI = "http://localhost:8080/Mobike-SRV/";
-	private final String BaseWebAppUri = "http://localhost:8080/Mobike-WAPP/";
+	private static final String BaseURI = "http://localhost:8080/SRV/";
+	private final String BaseWebAppUri = "/WAPP/";
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
 	
@@ -156,7 +156,7 @@ public class OperationsController {
 					e.printStackTrace();
 				}
 				System.out.println("token:" + map.get("user"));
-				NewCookie cookie = new NewCookie("token",map.get("user"),"/","","comment",3600,false);
+				NewCookie cookie = new NewCookie("token",map.get("user"),"/","","comment",86400,false);
 				return Response.ok(BaseWebAppUri.concat("home")).cookie(cookie).build();
 			}
 
@@ -446,7 +446,7 @@ public class OperationsController {
 				Map<String, String> map3 = null;
 				map3 = (Map<String, String>) mapmapper.readValue(token,
 						Map.class);
-				NewCookie cookie = new NewCookie("token",map.get("user"),"/","","comment",3600,false);
+				NewCookie cookie = new NewCookie("token",map.get("user"),"/","","comment",86400,false);
 				return Response.ok(BaseWebAppUri.concat("home")).cookie(cookie).build();
 			}
 			if(response.getStatus()==409){

@@ -18,8 +18,8 @@
 	<meta name="author" content="">
 	
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link id="theme-style" rel="stylesheet" href="./css/stiledev.css">
-	<link href="./css/material.min.css" rel="stylesheet">
+	<link id="theme-style" rel="stylesheet" href="/WAPP/css/stiledev.css">
+	<link href="/WAPP/css/material.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css"	rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Roboto:500,400' rel='stylesheet' type='text/css'>
 	
@@ -28,7 +28,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/ripples.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
 
-	<script src="./js/landing.js"></script>
+	<script src="/WAPP/js/landing.js"></script>
 </head>
 
 <body data-spy="scroll" >
