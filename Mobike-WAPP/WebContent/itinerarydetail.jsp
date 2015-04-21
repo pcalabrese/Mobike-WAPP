@@ -22,31 +22,12 @@
   <script src="/WAPP/js/loadgpx.js" type="text/javascript"></script>
   <script src="/WAPP/js/logout.js" type="text/javascript"></script>
   <script src="/WAPP/js/itinerarydetail.js"></script>
-  <script type="text/javascript">var json = ${it.get('route')};</script>
+  <script type="text/javascript">route = ${it.get('route')};</script>
   <script type="text/javascript">nickname = "${it.get('user').get('nickname')}";</script>
-  
-  <script type="text/javascript">
-  function loadGPXFileIntoGoogleMap(map, filename) {
-      $.ajax({url: filename,
-          dataType: "xml",
-          success: function(data) {
-            var parser = new GPXParser(data, map);
-            parser.setTrackColour("#ff0000");     // Set the track line colour
-            parser.setTrackWidth(5);          // Set the track line width
-            parser.setMinTrackPointDelta(0.001);      // Set the minimum distance between track points
-            parser.centerAndZoom(data);
-            parser.addTrackpointsToMap();         // Add the trackpoints
-            parser.addWaypointsToMap();           // Add the waypoints
-          }
-      });
-  }
+  <script type="text/javascript">uid = ${it.get('user').get('id')}</script>
   
   
   
- 
-     
-
-</script>
 </head>
 
 <body>
@@ -56,38 +37,43 @@
   <div class="container-fluid" style="padding-top: 50px;">
     <div class="row">
      <div class="col-xs-3">
-      
-    <script>
-    document.write("<div id=\"well\" class=\"well\"><h1 class=\"text-center\" style=\"font-style:italic;\">"+json.name+"</h1><div><p>"+ json.description  +"</p><p style=\"font-size:18px;\"><span style=\"font-size:30px\" class=\"mdi-maps-directions\"></span><span style=\"font-weight:500;\">"+json.length /1000+" Km  </span>  <span style=\"font-size:30px\" class=\"mdi-device-access-alarms\"></span><span style=\"font-weight:500;\">"+ json.duration/60+" Min.  </span></p><p>Type: <span style=\"font-weight:500;\">"+json.type+"<span></p><p>Creator:  <span style=\"font-weight:500;\">"+json.owner.nickname+"<span></p>");
-    document.write("<p>");
-    for(i=0;i<json.rating;i++){
-    	document.write("<span class=\"mdi-action-star-rate mdi-material-yellow\"  style=\"font-size:38px;\"></span>");
-    }
-    for(j=0;j<(json.rating-i);j++){
-    	document.write("<span class=\"mdi-action-star-rate mdi-material-grey\"  style=\"font-size:38px;\"></span>");
-    }
-    document.write("<span style=\"font-weight:500;\">"+ json.ratingnumber + "</span>");
-    document.write("</p>");
-    document.write(" <p style=\"font-size:18px;\"> Difficulty:<span style=\"font-weight:500;\">"+json.difficulty+"</span></p><p style=\"font-size:18px;\"> Bends:<span style=\"font-weight:500;\">"+json.bends+"</p>");
-    document.write("<div class=\"btn-group\"><a href=\"javascript:void(0)\" class=\"btn btn-success\">gpx file</a><a href=\"javascript:void(0)\" class=\"btn btn-success\">itn file</a></div></div></div></div>");
-
-    $(document).ready( function( e ){
-    	
-    	console.log( $('#dafuq').width() );
-    	var vvv = $('#dafuq').width();
-		var hhh = $('#well').height() + 100;
-    	$('#map').css({'width' : ( vvv+'px' ), 'height' : ( hhh+'px' )});
-    	
-    });
-    
-	$(window).resize( function( e ){
-		var vvv = $('#dafuq').width();
-		var hhh = $('#well').height() + 100;
-    	$('#map').css({'width' : ( vvv+'px' ), 'height' : ( hhh+'px' )});
-	});
-	    
-    </script>
-
+     	<div id="well" class="well">
+     		<h1 class="text-center" style="font-style:italic;" id="ititle"></h1>
+     			<div>
+     				<p id="idescription"></p>
+     				<p style="font-size:18px;">
+     					<span style="font-size:30px" class="mdi-maps-directions"></span>
+     					<span style="font-weight:500" id="ilength"></span>
+     					<span style="font-size:30px" class="mdi-device-access-alarms"></span>
+     					<span style="font-weight:500" id="iduration"></span>
+     				</p>
+     				<p>Type: 
+     					<span style="font-weight:500;" id="itype">
+     						<span></span>
+     					</span>
+     				</p>
+     				<p>Creator:  
+     					<span style="font-weight:500;" id="icreator">
+     						<span></span>
+     					</span>
+     				</p>
+     				<p>
+     					<p id="irating"></p>
+     					<span style="font-weight:500;" id="iratingnumber"></span>
+     				</p>
+     				<p style="font-size:18px;"> Difficulty:
+     					<span style="font-weight:500;" id="idifficulty"></span>
+     				</p>
+     				<p style="font-size:18px;"> Bends:
+     					<span style="font-weight:500;" id="ibends"></span>
+     				</p>
+     				<div class="btn-group">
+     					<a href="javascript:void(0)" class="btn btn-success">.GPX</a>
+     					<a href="javascript:void(0)" class="btn btn-default" disabled="">.ITN</a>
+     				</div>
+     			</div>
+     	</div>
+     </div>
 		<div class="col-xs-9" id="dafuq" style="top:20px;">
 			<div id="map" style="width: 400px; height: 200px;"></div>
 			<br><br>
@@ -155,7 +141,7 @@
    <div id="reviewbutton" style="position: fixed; bottom:5%; right:5%">
   <br>
   <br>
-  <a data-toggle="modal" data-target="#reviewModal" class="btn shadow-level4 btn-danger  btn-fab mdi-navigation-close" style="position: relative;z-index:9999; left: 90%;"></a>
+  <a  id="newreview" class="btn btn-primary btn-fab btn-raised mdi-content-create" style="position: relative;z-index:9999; left: 90%;"></a>
   </div>
 </div>
 
@@ -195,7 +181,7 @@
    <div class="form-group">
    <div id="mod-footer" class="modal-footer">
     <button type="button" class="btn btn-default shadow-level2" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary shadow-level2" click="javascript:recensione()">Submit</button>
+    <button type="button" class="btn btn-primary shadow-level2" id="rsubmit">Submit</button>
     </div>
     </fieldset>
     </form>

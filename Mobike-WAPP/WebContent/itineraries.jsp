@@ -20,7 +20,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
 	<script src="/WAPP/js/jquery.nouislider.all.js"></script>
 	
-	<script>var json = ${it};</script>
+	
+	<script> routes = ${it.get('routes')};</script>
 	<script> nickname = "${it.get('user').get('nickname')}";</script>
 	
 	<script src="/WAPP/js/itineraries.js"></script>
@@ -191,13 +192,7 @@
     
     <div class="col-xs-8" style="padding-top:25px">
       <div class="list-group">
-        
-		<script>
-		for(i=0; i<json.routes.length; i++){
-		document.write("<div class=\"list-group-item\"><div class=\"row-picture\"><img class=\"img-responsive img-"+json.routes[i].type+"\" src=\"" + json.routes[i].imgUrl+"&size=150x150"+   "\" alt=\"icon\"></div><div class=\"row-content\"><div class=\"least-content\">"+json.routes[i].owner.nickname+"</div><h4 class=\"list-group-item-heading\"><a href=\"itineraries/" + json.routes[i].id + "\">" + json.routes[i].name + "</a>"+"</h4><p class=\"list-group-item-text\"><span class=\"mdi-maps-directions-car\" style=\"font-size:18px;\"></span>"+json.routes[i].length/1000+"Km.<span class=\"mdi-action-alarm\" style=\"font-size:18px;\"></span>"+json.routes[i].duration/60 + "min.</p></div></div><div class=\"list-group-separator\"></div>");}
-		
-		</script>
-        
+
       </div>
     </div>
   </div>
