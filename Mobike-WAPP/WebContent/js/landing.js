@@ -46,7 +46,7 @@ function onSignInCallback(authResult) {
 							$.ajax({
 								type: 'POST',
 								contentType: "application/json; charset=utf-8",
-								url: 'ops/createuser',
+								url: '/WAPP/ops/createuser',
 								data: json,
 								statusCode: {
 									200: function(data1) {gapi.auth.signOut(); window.location = "home"},
@@ -66,7 +66,7 @@ function onSignInCallback(authResult) {
 				400 : function() {
 					$("errModal").modal('show');
 					$("#errSubmit").on('click', function(){
-						window.location = "./landing";
+						window.location = "/WAPP/landing";
 					});
 				}
 			},

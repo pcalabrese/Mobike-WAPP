@@ -51,7 +51,7 @@ import com.sun.jersey.api.client.WebResource;
 @Path("/ops")
 public class OperationsController {
 
-	private static final String BaseURI = "http://localhost:8080/SRV/";
+	private static final String BaseURI = "http://mobike.ddns.net/SRV/";
 	private final String BaseWebAppUri = "/WAPP/";
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
@@ -244,6 +244,7 @@ public class OperationsController {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createItineraries(String json, @CookieParam("token") String userToken){
 		System.out.println(json.toString());
+		System.out.println(userToken);
 		JSONObject route = null;
 		Crypter crypter = new Crypter();
 		JSONObject userplain = null;
@@ -251,9 +252,10 @@ public class OperationsController {
 			route = new JSONObject(json);
 			userplain = new JSONObject(crypter.decrypt(userToken));
 			route.put("owner", userplain);
-			
+			System.out.println(userplain);
 			String cryptedRoute = crypter.encrypt(route.toString());
-			
+			System.out.println("cryptedRoute:" + route.toString());
+			System.out.println(route.toString());
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("user", userToken);
 			map.put("route", cryptedRoute);
@@ -262,7 +264,7 @@ public class OperationsController {
 			
 			URI uri = null;
 			try {
-				uri = new URI("./routes/itineraries/".concat(output));
+				uri = new URI("./itineraries/".concat(output));
 			} catch (URISyntaxException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -462,28 +464,31 @@ public class OperationsController {
 	}
 	
 	@POST
-	@Path("/review/insertnew")
+	@Path("/review/new")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response newReview(String json, @CookieParam("token") String userToken){
-		Map<String,String> map = new HashMap<String,String>();
 		Crypter crypter = new Crypter();
-		
+		JSONObject jsonReceived, user;
 		try {
-			map.put("review", crypter.encrypt(json));
+			jsonReceived = new JSONObject(json);
+			user = new JSONObject(crypter.decrypt(userToken));
+			if( jsonReceived.getJSONObject("reviewPK").get("usersId").equals(user.get("id"))){
+				String reviewencrypted = crypter.encrypt(json);
+				JSONObject output = new JSONObject();
+				output.put("review", reviewencrypted);
+				output.put("user", userToken);
+				ClientResponse response = wr.path("/reviews").path("/create").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, output);
+				return Response.status(response.getStatus()).build();
+			}
+			else {
+				return Response.status(401).build();
+			}
+			
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return Response.status(500).build();
 		}
-		map.put("user", userToken);
-		ObjectMapper mapper = new ObjectMapper();
-		
-		ClientResponse response = wr.path("/reviews").path("/create").type(MediaType.APPLICATION_JSON).post(ClientResponse.class);
-		
-		return Response.status(response.getStatus()).build();
-		
-		
-		
-		
 	}
 	
 	

@@ -14,35 +14,88 @@ $('document').ready(function(){
   	
   	loadGPXFileIntoGoogleMap(map, "/SRV/routes/retrieve/"+route.id+"/gpx");
   	
-  	var vvv = $('#dafuq').width();
+  	var vvv = $('#col').width();
 	var hhh = $('#well').height() + 100;
 	$('#map').css({'width' : ( vvv+'px' ), 'height' : ( hhh+'px' )});
+	
+	var revlist = $('#rlist');
+	for(i=0;i<reviews.length;i++){
+		
+		var revit = '<div class="list-group-item">' +
+						'<div class="row-action-primary">'+
+							'<i class="mdi-action-perm-identity mdi-material-green"></i>'+
+						'</div>'+
+						'<div class="row-content">'+
+							'<div class="least-content">'
+								+reviews[i].owner.nickname+
+							'</div>'+
+							'<h4 class="list-group-item-heading" id="ritemheading">';
+		
+		for(j=0;j<reviews[i].rate;j++){
+			revit += '<span class="mdi-action-star-rate mdi-material-yellow"  style="font-size:38px"></span>';
+		}
+		
+		revit += '</h4><p class="list-group-item-text">'+reviews[i].message+'</p></div></div><div class="list-group-separator"></div>';
+		
+		revlist.append(revit);
+		
+	}
+	
+	for(i=0;i<reviews.length;i++){
+		if(reviews[i].owner.id == uid){
+			$('#newreview').attr('disabled','""');
+		}
+	}
 	
 	$('#newreview').on('click', function(){
 		$('#reviewModal').modal('show');
 	});
+	
 	
 	$('#rsubmit').on('click', function(){
 		var rate = $('#rate').val();
 		var message = $('#textreview').val();
 		
 		var json = {
-			"ReviewPK": {
-				"usersId": uid,
-				"routesId": route.id,
-			},
-			"rate": rate,
-			"message": message
+				 "reviewPK": {
+					 "usersId": uid,
+					 "routesId": route.id,
+				},
+				 "rate": $('#rate').val(),
+				 "message": $('#textreview').val()
 		};
 		
-		$.ajax
-		$('#reviewModal').modal('hide');
-		
+		$.ajax({
+			type: 'POST',
+			contentType: "application/json; charset=UTF-8",
+			url: '/WAPP/ops/review/new',
+			data: JSON.stringify(json),
+			statusCode: {
+				// da cambiareeeeee ma workaaaaaaaaaaa!!!
+				200: function(){$('#mod-body').text("Review Succesfully inserted. Thank You!"); ajaxCallback();},
+				401: function(){$('#mod-body').text("We're Sorry..you're not authorized, please login and try again. Thank You!"); ajaxCallback();},
+				500: function(){$('#mod-body').text("We're Sorry..there was an error and a group of monkeys are working on it..please try again!"); ajaxCallback();},
+				406: function(){$('#mod-body').text("Itinerary already reviewed...only one review for user is allowed! Thank you!"); ajaxCallback();},
+			}
+			
+		});
 		
 	});
-  	
-  	
+
+
+	
 });
+
+function ajaxCallback(){
+	$('#rclose').hide();
+	$('#rsubmit').hide();
+	$('#rok').show();
+	$('#rok').on('click', function(){
+		$('#reviewModal').modal('hide');
+	});
+	
+	window.location.reload();
+};
 
 function loadGPXFileIntoGoogleMap(map, filename) {
     $.ajax({url: filename,

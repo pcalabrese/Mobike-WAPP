@@ -23,6 +23,7 @@
   <script src="/WAPP/js/logout.js" type="text/javascript"></script>
   <script src="/WAPP/js/itinerarydetail.js"></script>
   <script type="text/javascript">route = ${it.get('route')};</script>
+  <script type="text/javascript">reviews = ${it.get('route').get('reviewList')};</script>
   <script type="text/javascript">nickname = "${it.get('user').get('nickname')}";</script>
   <script type="text/javascript">uid = ${it.get('user').get('id')}</script>
   
@@ -74,7 +75,7 @@
      			</div>
      	</div>
      </div>
-		<div class="col-xs-9" id="dafuq" style="top:20px;">
+		<div class="col-xs-9" id="col" style="top:20px;">
 			<div id="map" style="width: 400px; height: 200px;"></div>
 			<br><br>
 		</div>
@@ -83,64 +84,16 @@
     <div class="row"></div>
     <div class="row">
     	<div class="well well-sm"><strong>Reviews:</strong></div>
-    	<div class="list-group">
-    	<script>
-    	var reviews = ${it.get('route').get('reviewList')};
+    	<div class="list-group" id="rlist">
     	
-    	for(i=0; i<reviews.length; i++){
-    		document.write("<div class=\"list-group-item\"><div class=\"row-action-primary\"><i class=\"mdi-action-perm-identity mdi-material-green\"></i></div><div class=\"row-content\"><div class=\"least-content\">"+reviews[i].owner.nickname+"</div>");
-    		document.write("<h4 class=\"list-group-item-heading\">");
-    		for(j=0;j<reviews[i].rate;j++){
-    			document.write("<span class=\"mdi-action-star-rate mdi-material-yellow\"  style=\"font-size:38px;\"></span>");
-    		}
-    		
-    		document.write("</h4><p class=\"list-group-item-text\">"+reviews[i].message+"</p></div></div><div class=\"list-group-separator\"></div>");
-    		
-    	}
-    	
-    	var userid = ${it.get('user').get('id')};
-    	var routeid = ${it.get('route').get('id')};
-    	for(i=0;i<reviews.length; i++){
-			  if(reviews[i].owner.id == userid)
-				  $("reviewbutton").hide();
-		  }
-		  $("reviewbutton").hide();
-	  
-    	 function recensione(){
-    		 
-    		 
-    		 var json = {
-    				 "ReviewPK": {
-    					 "usersId": userid.val(),
-    					 "routesId": routeid.val(),
-    				},
-    				 "rate": $('#rate').val(),
-    				 "message": $('#textreview').val()
-			};
-    		 
-    		 $.ajax({
-    			 type: 'POST',
-    			 url: 'http://mobike.ddns.net/SRV/review/insertnew',
-    			 contentType: "application/json; charset=utf-8",
-    			 data: json,
-    			 success: function() {alert("Thank you!"); location.reload();},
-    			 error: function() {alert("You can Review only one time for itinerary...update and deletion from web are under development"); location.reload;},
-    			 failure: function() {alert("You can Review only one time for itinerary...update and deletion from web are under development"); location.reload;}
-    		 });
-    	 }
-    	 
-    		 
-    		  
-    	
-    	</script>
       
         </div>
     </div>
     
     
    <div id="reviewbutton" style="position: fixed; bottom:5%; right:5%">
-  <br>
-  <br>
+  <br/>
+  <br/>
   <a  id="newreview" class="btn btn-primary btn-fab btn-raised mdi-content-create" style="position: relative;z-index:9999; left: 90%;"></a>
   </div>
 </div>
@@ -180,8 +133,10 @@
    </div>
    <div class="form-group">
    <div id="mod-footer" class="modal-footer">
-    <button type="button" class="btn btn-default shadow-level2" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default shadow-level2" data-dismiss="modal" id="rclose">Close</button>
     <button type="button" class="btn btn-primary shadow-level2" id="rsubmit">Submit</button>
+    <button type="button" class="btn btn-primary shadow-level2" id="rok" style="display:none">OK</button>
+    
     </div>
     </fieldset>
     </form>

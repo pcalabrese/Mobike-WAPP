@@ -36,7 +36,7 @@ import com.sun.jersey.api.view.Viewable;
 @Path("/")
 public class PagesController {
 	
-	private static final String BaseURI = "http://localhost:8080/SRV/";
+	private static final String BaseURI = "http://mobike.ddns.net/SRV/";
 	private final String BaseWebAppUri = "/WAPP/";
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
@@ -126,8 +126,18 @@ public class PagesController {
 	@GET
 	@Path("/itineraries/new")
 	@Produces(MediaType.TEXT_HTML)
-	public Response newItinerary(){
-		return Response.ok(new Viewable("/itncreation.jsp",null)).build();
+	public Response newItinerary(@CookieParam("token") String userToken){
+		Crypter crypter = new Crypter();
+		JSONObject outputOBJ = new JSONObject();
+		try {
+			JSONObject user = new JSONObject(crypter.decrypt(userToken));
+			outputOBJ.put("user", user);
+		}
+		catch (Exception e) {
+			return Response.status(500).build();
+		}
+		
+		return Response.ok(new Viewable("/itinerarycreation.jsp",outputOBJ)).build();
 	}
 	
 	@GET

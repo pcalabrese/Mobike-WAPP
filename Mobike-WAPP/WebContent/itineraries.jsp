@@ -42,7 +42,7 @@
   <a class="btn shadow-level4 btn-primary  btn-fab mdi-content-add"
           style="position: fixed;z-index:9999;
     bottom: 5%;
-    right: 2%;" href="/itineraries/new"></a>
+    right: 2%;" href="/WAPP/itineraries/new"></a>
           
     
     
@@ -53,15 +53,23 @@
         <form class="form-horizontal">
           <fieldset>
             <legend>Search Itineraries</legend>
-            
+        <div class="form-group">
+            <label for="name" class="col-lg-2 control-label">Name</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="name" placeholder="Route name..." 
+                 data-hint="Specify the route or journey name">
+			</div>
+        </div>    
+            <br>
         <div class="form-group">
             <label for="from" class="col-lg-2 control-label">From</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="to" placeholder="Start Location..." 
+                <input type="text" class="form-control" id="from" placeholder="Start Location..." 
                  data-hint="Specify a location, an address or geographic coordinates">
 			</div>
         </div>
-              <br>
+        <br>
+              
             <div class="form-group">
             <label for="to" class="col-lg-2 control-label">To</label>
             <div class="col-lg-10">
@@ -91,7 +99,6 @@
              <label for="maxL" class="col-lg-2 control-label">Max Length</label>
             	<div class="col-lg-4">
             	<select class="form-control" id="maxl">
-                    <option>0</option>
                     <option>50</option>
                     <option>100</option>
                     <option>200</option>
@@ -103,6 +110,7 @@
                     <option>800</option>
                     <option>900</option>
                     <option>1000</option>
+                    <option selected="selected" value="10000">>1000</option>
                 </select>
 				</div>
 			</div>
@@ -135,7 +143,7 @@
                     <option>7</option>
                     <option>8</option>
                     <option>9</option>
-                    <option>10</option>
+                    <option selected="selected">10</option>
                 </select>
 				</div>
 				</div>
@@ -169,16 +177,16 @@
                     <option>7</option>
                     <option>8</option>
                     <option>9</option>
-                    <option>10</option>
+                    <option selected="selected">10</option>
                 </select>
 				</div>
 				</div>
 				<br>
 					
 				<div class="form-group">
-           			 <div class="col-lg-10 col-lg-offset-2">
-                		<button class="btn btn-default">Cancel</button>
-                		<button type="submit" class="btn btn-primary">Submit</button>
+           			 <div class="col-lg-12 col-lg-offset-4">
+                		<!--  <button class="btn btn-default">Reset</button>-->
+                		<button class="btn btn-primary btn-lg">Reset</button>
             		</div>
         		</div>
 			</div>
