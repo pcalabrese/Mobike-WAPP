@@ -26,7 +26,7 @@
   <script type="text/javascript">reviews = ${it.get('route').get('reviewList')};</script>
   <script type="text/javascript">nickname = "${it.get('user').get('nickname')}";</script>
   <script type="text/javascript">uid = ${it.get('user').get('id')}</script>
-  <script type="text/javascript">var url = "${it.get('route').get('url')}"; rurl = "/downloads/gpxs/" + url.substring(15) </script>
+  <script type="text/javascript">var url = "${it.get('route').get('url')}"; rurl = "/downloads/gpxs/" + url </script>
   
   
   
