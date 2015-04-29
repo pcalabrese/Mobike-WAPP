@@ -41,7 +41,10 @@ public class PagesController {
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
 	
-	
+	@GET
+	public Response welcome(){
+		return Response.ok(new Viewable("/landing.jsp")).build();
+	}
 	
 	
 	@GET
