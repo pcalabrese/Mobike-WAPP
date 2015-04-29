@@ -5,6 +5,8 @@ $('document').ready(function() {
 					});
 					
 					$('footer').load('/WAPP/template/footer.jsp');
+					
+					
 						
 					$.material.init();	
 					printRoutes();

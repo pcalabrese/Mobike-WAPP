@@ -6,6 +6,8 @@ $('document').ready(function(){
 	$('footer').load('/WAPP/template/footer.jsp');
 	$.material.init();
 	
+	$('#dgpx').attr("href", rurl);
+	
   	var mapOptions = {
     zoom: 8,
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -83,6 +85,8 @@ $('document').ready(function(){
 		});
 		
 	});
+	
+	
 
 
 	

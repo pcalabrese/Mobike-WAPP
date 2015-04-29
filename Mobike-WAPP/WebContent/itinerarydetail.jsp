@@ -26,7 +26,7 @@
   <script type="text/javascript">reviews = ${it.get('route').get('reviewList')};</script>
   <script type="text/javascript">nickname = "${it.get('user').get('nickname')}";</script>
   <script type="text/javascript">uid = ${it.get('user').get('id')}</script>
-  <script type="text/javascript">rurl = ${it.get('route').get('url')};</script>
+  <script type="text/javascript">var url = "${it.get('route').get('url')}"; rurl = "/downloads/gpxs/" + url.substring(15) </script>
   
   
   
@@ -62,7 +62,7 @@
      				<p>
      					<p id="irating"></p>
      					<span style="font-weight:500;" id="iratingnumber"></span>
-     				</p>
+     				
      				<p style="font-size:18px;"> Difficulty:
      					<span style="font-weight:500;" id="idifficulty"></span>
      				</p>
@@ -70,7 +70,7 @@
      					<span style="font-weight:500;" id="ibends"></span>
      				</p>
      				<div class="btn-group">
-     					<a href="/WAPP/downloads/gpxs/" class="btn btn-success">.GPX</a>
+     					<a id="dgpx" class="btn btn-success">.GPX</a>
      					<a href="javascript:void(0)" class="btn btn-default" disabled="">.ITN</a>
      				</div>
      			</div>
@@ -81,23 +81,28 @@
 			<br><br>
 		</div>
     </div>
-    </div>
-    <div class="row"></div>
+    
     <div class="row">
-    	<div class="well well-sm"><strong>Reviews:</strong></div>
+    </div>
+    <div class="row">
+    	<div class="well well-sm">
+    		<strong>
+    			Reviews:
+    		</strong>
+    	</div>
     	<div class="list-group" id="rlist">
-    	
-      
-        </div>
+	 	</div>
+    </div>
+    
     </div>
     
     
    <div id="reviewbutton" style="position: fixed; bottom:5%; right:5%">
-  <br/>
-  <br/>
-  <a  id="newreview" class="btn btn-primary btn-fab btn-raised mdi-content-create" style="position: relative;z-index:9999; left: 90%;"></a>
+  		<br/>
+  		<br/>
+  		<a  id="newreview" class="btn btn-primary btn-fab btn-raised mdi-content-create" style="position: relative;z-index:9999; left: 90%;"></a>
   </div>
-</div>
+
 
 <div id="reviewModal" class="modal fade">
  <div class="modal-dialog">
@@ -139,19 +144,14 @@
     <button type="button" class="btn btn-primary shadow-level2" id="rok" style="display:none">OK</button>
     
     </div>
+    </div>
     </fieldset>
     </form>
    </div>
   </div>
  </div>
-</div>
- 
 
-  
-  
-  
-  
-  
+ 
  <footer></footer>
 </body>
 </html>
