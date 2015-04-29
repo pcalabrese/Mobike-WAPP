@@ -1,5 +1,5 @@
 $('document').ready(function() {
-					$("navbar").load('./template/navbar.jsp', function() {
+					$("navbar").load('/WAPP/template/navbar.jsp', function() {
 						$('user').append(nickname);
 						$('#mitineraries').addClass("active");
 					});
@@ -31,7 +31,7 @@ function printRoutes() {
 									+ "&size=150x150"
 									+ "\" alt=\"icon\"></div><div class=\"row-content\"><div class=\"least-content\">"
 									+ routes[i].owner.nickname
-									+ "</div><h4 class=\"list-group-item-heading\"><a href=\"itineraries/"
+									+ "</div><h4 class=\"list-group-item-heading\"><a href=\"/WAPP/itineraries/"
 									+ routes[i].id
 									+ "\">"
 									+ routes[i].name

@@ -26,6 +26,7 @@
   <script type="text/javascript">reviews = ${it.get('route').get('reviewList')};</script>
   <script type="text/javascript">nickname = "${it.get('user').get('nickname')}";</script>
   <script type="text/javascript">uid = ${it.get('user').get('id')}</script>
+  <script type="text/javascript">rurl = ${it.get('route').get('url')};</script>
   
   
   
@@ -69,7 +70,7 @@
      					<span style="font-weight:500;" id="ibends"></span>
      				</p>
      				<div class="btn-group">
-     					<a href="javascript:void(0)" class="btn btn-success">.GPX</a>
+     					<a href="/WAPP/downloads/gpxs/" class="btn btn-success">.GPX</a>
      					<a href="javascript:void(0)" class="btn btn-default" disabled="">.ITN</a>
      				</div>
      			</div>
