@@ -94,7 +94,7 @@
         <img  src="./img/map.png">
         <h2>Expand your ways</h2>
         <p>Give more space to your rides, create and share events with our community.</p>
-      </div><!-- coloumn-->
+      </div>
                     
       <div class="col-md-4 text-center">
         <img class="img-circle" src="./img/event.png">
@@ -148,28 +148,7 @@
 
 
 	<!-- ******FOOTER****** -->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-3"></div>
-				<div class="col-xs-4">
-					<p>Features</p>
-					<p>Android App</p>
-				</div>
-
-				<div class="col-xs-4">
-					<p>Team</p>
-					<p>Follow Us</p>
-				</div>
-			</div>
-			<small class="copyright">Developed for the<a
-				href="https://sites.google.com/a/dis.uniroma1.it/google-technologies-for-cloud-and-web-development/"
-				target="_blank"> Google Technologies for Cloud and Web
-					Developement </a> Workshop
-			</small>
-		</div>
-		<!--//container-->
-	</footer>
+	<footer></footer>
 	
 	
 	<!--//footer-->

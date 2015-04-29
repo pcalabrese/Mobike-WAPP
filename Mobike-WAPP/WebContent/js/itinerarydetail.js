@@ -2,6 +2,8 @@ $('document').ready(function(){
 	$("navbar").load('../template/navbar.jsp', function(){
 		$('user').append(nickname);
 	});
+	
+	$('footer').load('/WAPP/template/footer.jsp');
 	$.material.init();
 	
   	var mapOptions = {

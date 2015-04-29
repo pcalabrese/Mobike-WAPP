@@ -3,6 +3,8 @@ $('document').ready(function() {
 						$('user').append(nickname);
 						$('#mitineraries').addClass("active");
 					});
+					
+					$('footer').load('/WAPP/template/footer.jsp');
 						
 					$.material.init();	
 					printRoutes();

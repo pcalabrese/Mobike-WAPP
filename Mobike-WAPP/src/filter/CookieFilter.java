@@ -66,6 +66,9 @@ public class CookieFilter implements Filter {
 		} else if (uri.indexOf("/contacts") > 0 ){
 			chain.doFilter(request, response);
 			return;
+		} else if (uri.indexOf("/template") > 0){
+			chain.doFilter(request, response);
+			return;
 		}
 		((HttpServletResponse) response).sendRedirect("/WAPP/landing");
 

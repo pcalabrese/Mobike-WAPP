@@ -1,5 +1,7 @@
 $('document').ready(function(){
 	$("navbar").load('./template/navbar-landing.html');
+	
+	$('footer').load('/WAPP/template/footer.jsp');
 	$.material.init();
 	
 });

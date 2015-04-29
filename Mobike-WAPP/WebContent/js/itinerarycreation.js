@@ -9,6 +9,8 @@ $(document).ready(function(){
 	$("navbar").load('../template/navbar.jsp', function(){
 		$('user').append(nickname);
 	});
+	
+	$('footer').load('/WAPP/template/footer.jsp');
 	$.material.init();
 	
 	$('.slider').noUiSlider({
@@ -30,6 +32,12 @@ $(document).ready(function(){
 		bindAutoComplete();
 	});
 	
+	$('#destrem').on('click', function(){
+		if($('#destli').children().length != 1){
+		$('#destli').children().last().remove();}
+		
+	});
+	
 	$('#saveroute').on('click', function(){
 		uploadRoute();
 	});
@@ -38,14 +46,19 @@ $(document).ready(function(){
 		window.location.reload();
 	});
 	
-	$('#lgndnarr').on('click', function(){
+	$('#displaynarr').on('click', function(){
 		
-		$('#narrative').hide();
+		if($('#narr').is(":visible")){
+			$('#narr').hide();
+		}
+		else
+			$('#narr').show();
+		
 	})
 	
 	$(window).on('resize', function(){
-		$('#map').children().first().css('width', parseInt($('.col-xs-8').css('width'))-40);
-		$('#map').children().first().css('height', parseInt($('.col-xs-4').css('height'))-40);
+		$('#map').children().first().css('width', parseInt($('.col-xs-9').css('width'))-40);
+		$('#map').children().first().css('height', parseInt($('.col-xs-3').css('height'))-40);
 		
 	});
 	
@@ -125,8 +138,8 @@ MQA.EventUtil.observe(window, 'load', function() {
 
 
 function mapSizer(){
-	$('#map').css('width', parseInt($('.col-xs-8').css('width'))-40);
-	$('#map').css('height', parseInt($('.col-xs-4').css('height'))-40);
+	$('#map').css('width', parseInt($('.col-xs-9').css('width'))-40);
+	$('#map').css('height', parseInt($('.col-xs-3').css('height'))-40);
 };
 
 function reqGeoCode(address){

@@ -37,7 +37,7 @@
   <div class="container-fluid" style="padding-top: 50px;">
 
   	<div class="row">
-  		<div class="col-xs-4">
+  		<div class="col-xs-3">
   			<div id="well" class="well">
   				<form class="form-horizontal">
     				<fieldset>
@@ -54,8 +54,8 @@
 	        				
 	        				<br>	
 	        				<div class="form-group">
-	        					<div class="col-lg-12 col-lg-offset-4">
-	            				<label for="inputTo" class="control-label" id="adddest">Destinations +</label>
+	        					<div class="col-lg-12 col-lg-offset-3">
+	            				<label for="inputTo" class="control-label" id="adddest">Destinations + <div id="destrem">-</div></label>
 	            				</div>
 	            				<div class="col-lg-12" id = "destli">
 	                				<input class="form-control dt" id="inputTo"  type="text">
@@ -72,7 +72,7 @@
         				</div>
         				<br>
         				<div class="form-group">
-            				<label for="inputDesc" class="col-lg-3 control-label">Description</label>
+            				<label for="inputDesc" class="col-lg-3 control-label">Descr.</label>
             				<div class="col-lg-9">
                 				<input class="form-control" id="inputDesc" placeholder="Itinerary Description" type="text">
             				</div>
@@ -84,7 +84,7 @@
                 				<div class="slider shor" id="inputDiff"></div>
             				</div>
         				</div>
-        				<br>
+        				
         				<div class="form-group">
             				<label for="inputBends" class="col-lg-3 control-label">Bends</label>
             				<div class="col-lg-9">
@@ -97,14 +97,14 @@
                 				<input class="form-control" id="length" placeholder="0 Km." type="text" disabled="">
             				</div>
         				</div>
-        				<br>
+        				
         				<div class="form-group">
             				<label for="time" class="col-lg-3" style="text-align: -webkit-right;">Time:</label>
             				<div class="col-lg-9">
                 				<input class="form-control" id="time" placeholder="00:00" type="text" disabled="">
             				</div>
         				</div>
-        				<br>
+        				
         				<div class="form-group">
             				<label for="inputType" class="col-lg-3 control-label">Type</label>
             				<div class="col-lg-9">
@@ -128,7 +128,7 @@
         		</form>
         	</div>
         </div>
-        <div class="col-xs-8" style="top:20px">
+        <div class="col-xs-9" style="top:20px">
         	<div id='map' style='width:1920px; height:1080px;'></div>
         </div>
         
@@ -138,9 +138,9 @@
        </div>
        <div class= "row">
        	<div class="col-lg-10">
-       	<div class= "well">
-       	<legend id = "lgndnarr">Route Narrative</legend>
-       	<div id="narrative" style="display:none"></div>
+       	<div class= "well" id="narr" style="display:none">
+       	<legend>Route Narrative</legend>
+       	<div id="narrative" ></div>
        	</div>
        	</div>
        </div>
@@ -153,10 +153,15 @@
         				
         				
     <div id="floatbuttons" style="position: fixed; bottom:5%; right:5%">
-  <a  id="reset" class="btn btn-danger btn-fab btn-raised mdi-navigation-close" style="position: relative;z-index:9999; left: 90%;"></a>
+  
+  <a  id="displaynarr" class="btn btn-success btn-fab btn-raised mdi-action-list" style="position: relative;z-index:9999; left: 90%;"></a>
+  
   <br/>
   <br/>
   <a  id="saveroute" class="btn btn-primary btn-fab btn-raised mdi-content-save" style="position: relative;z-index:9999; left: 90%;"></a>
+  <br/>
+  <br/>  
+  <a  id="reset" class="btn btn-danger btn-fab btn-raised mdi-navigation-close" style="position: relative;z-index:9999; left: 90%;"></a>
   </div>
   
   
@@ -183,7 +188,9 @@
     
    </div>
   </div>
- </div>    				
+ </div> 
+ 
+ <footer></footer>   				
         				
 
 </body>

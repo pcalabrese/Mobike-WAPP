@@ -805,7 +805,7 @@ body.inverse,body.inverse .form-control{color:rgba(255,255,255,.84)}
 body,h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4{font-family:RobotoDraft,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
 font-weight:300}
 h5,h6{font-weight:400}
-a,a:hover,a:focus{color:#009587}
+a,a:hover,a:focus{}
 body .well,.container .well,.container-fluid .well,body .well:not([class^="well well-material-"]),.container .well:not([class^="well well-material-"]),.container-fluid .well:not([class^="well well-material-"]),body .well .form-control,.container .well .form-control,.container-fluid .well .form-control,body .well:not([class^="well well-material-"]) .form-control,.container .well:not([class^="well well-material-"]) .form-control,.container-fluid .well:not([class^="well well-material-"]) .form-control{color:rgba(0,0,0,.84)}
 body .well .floating-label,.container .well .floating-label,.container-fluid .well .floating-label,body .well:not([class^="well well-material-"]) .floating-label,.container .well:not([class^="well well-material-"]) .floating-label,.container-fluid .well:not([class^="well well-material-"]) .floating-label{color:#7e7e7e}
 body .well .form-control::-webkit-input-placeholder,.container .well .form-control::-webkit-input-placeholder,.container-fluid .well .form-control::-webkit-input-placeholder,body .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder,.container .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder,.container-fluid .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder{color:#7e7e7e}
@@ -907,7 +907,7 @@ color:rgba(0,0,0,.84)}
 .btn-inverse:not(.btn-link):not(.btn-flat){background-color:#3f51b5;
 color:rgba(255,255,255,.84)}
 .btn-primary:not(.btn-link):not(.btn-flat){
-background-color:#19b6fc !important; /*#00c853*/
+background-color:#2196F3 !important; /*#00c853*/
 /*border: 1px solid #2196F3 !important;*/
 color:rgba(0,0,0,.84);
 font-weight:500 !important;
@@ -2544,27 +2544,32 @@ left:-5px}
 border:0;
 box-shadow:0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12)}
 .panel>.panel-heading,.panel-default>.panel-heading{background-color:#ffffff;}
-.panel-Montuoso{border: 5px solid #795548 !important;}
-.panel-Pianeggiante{border: 5px solid #4caf50 !important;}
-.panel-Collinare{border: 5px solid #FBC02D !important;}
-.panel-Costiero{border: 5px solid #2196f3 !important;}
+.panel-Mountain{border: 5px solid #795548 !important;}
+.panel-Plain{border: 5px solid #4caf50 !important;}
+.panel-Hill{border: 5px solid #FBC02D !important;}
+.panel-Coast{border: 5px solid #2196f3 !important;}
+.panel-Mixed{border: 5px solid #808080!important;}
 
-.img-Montuoso {border: 2px solid #795548 !important;
+.img-Mountain {border: 2px solid #795548 !important;
     -webkit-box-shadow:     0 3px 6px rgba(121,85,72,0.30), 0 6px 6px rgba(121,85,72,0.35);
     -moz-box-shadow:        0 3px 6px rgba(121,85,72,0.30), 0 6px 6px rgba(121,85,72,0.35);
     box-shadow:             0 3px 6px rgba(121,85,72,0.30), 0 6px 6px rgba(121,85,72,0.35);}
-.img-Pianeggiante{border: 2px solid #4caf50 !important;
+.img-Plain{border: 2px solid #4caf50 !important;
     -webkit-box-shadow:     0 3px 6px rgba(76,175,80,0.30), 0 6px 6px rgba(76,175,80,0.35);
     -moz-box-shadow:        0 3px 6px rgba(76,175,80,0.30), 0 6px 6px rgba(76,175,80,0.35);
     box-shadow:             0 3px 6px rgba(76,175,80,0.30), 0 6px 6px rgba(76,175,80,0.35);}
-.img-Collinare{border: 2px solid #FBC02D !important;
+.img-Hill{border: 2px solid #FBC02D !important;
     -webkit-box-shadow:     0 3px 6px rgba(251,192,45,0.30), 0 6px 6px rgba(251,192,45,0.35);
     -moz-box-shadow:        0 3px 6px rgba(251,192,45,0.30), 0 6px 6px rgba(251,192,45,0.35);
     box-shadow:             0 3px 6px rgba(251,192,45,0.30), 0 6px 6px rgba(251,192,45,0.35);}
-.img-Costiero{border: 2px solid #2196f3 !important;
+.img-Coast{border: 2px solid #2196f3 !important;
     -webkit-box-shadow:     0 3px 6px rgba(33,150,243,0.30), 0 6px 6px rgba(33,150,243,0.35);
     -moz-box-shadow:        0 3px 6px rgba(33,150,243,0.30), 0 6px 6px rgba(33,150,243,0.35);
     box-shadow:             0 3px 6px rgba(33,150,243,0.30), 0 6px 6px rgba(33,150,243,0.35);}
+.img-Mixed{border: 2px solid #808080!important;
+    -webkit-box-shadow:     0 3px 6px rgba(80,80,80,0.30), 0 6px 6px rgba(80,80,80,0.35);
+    -moz-box-shadow:        0 3px 6px rgba(80,80,80,0.30), 0 6px 6px rgba(80,80,80,0.35);
+    box-shadow:             0 3px 6px rgba(80,80,80,0.30), 0 6px 6px rgba(80,80,80,0.35);}
     
 .done{border: 2px solid #4caf50 !important; background-color:#4caf50 !important; color:/*rgba(0,0,0,0.70)*/ #fff !important;
     -webkit-box-shadow:     0 3px 6px rgba(76,175,80,0.30), 0 6px 6px rgba(76,175,80,0.35);
@@ -2574,13 +2579,13 @@ box-shadow:0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12)}
 .panel-white>.panel-heading{background-color:#fff}
 .panel-inverse>.panel-heading{background-color:#3f51b5}
 .panel-primary>.panel-heading{background-color:#00C853}
-.panel-Montuoso>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;
+.panel-Mountain>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;
 }
-.panel-Pianeggiante>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;}
-.panel-Collinare>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;}
+.panel-Plain>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;}
+.panel-Hill>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;}
 .panel-event>.panel-heading{background-color:#90CAF9;color:rgba(0,0,0,0.84) !important;}
-.panel-Costiero>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;}
-
+.panel-Coast>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;}
+.panel-Mixed>.panel-heading{background-color:#ECEFF1;color:rgba(0,0,0,0.84) !important;}
 .panel-success>.panel-heading{background-color:#0f9d58}
 .panel-info>.panel-heading{background-color:#03a9f4}
 .panel-warning>.panel-heading{background-color:#ff5722}

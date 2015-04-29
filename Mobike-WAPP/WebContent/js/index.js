@@ -2,11 +2,14 @@ $('document').ready(function(){
 	$("navbar").load('./template/navbar.jsp', function(){
 		$('user').append(nickname);
 	});
+	
+	$('footer').load('/WAPP/template/footer.jsp');
+	
 	$.material.init();
 	console.log(routes.length);
 	
 	for(i=0; i<json.routes.length; i++){
-	$('#routesRow').append("<a href=\"itineraries/"+json.routes[i].id+"\"><div class=\"col-xs-4\"> <div class=\"panel panel-"+json.routes[i].type+"\"> <div class=\"panel-heading\"> <h3 class=\"panel-title\"><b>" + json.routes[i].name + "</b></h3> <span class=\"glyphicon mdi-maps-directions-car\"></span>"+ json.routes[i].length/1000 + " Km.    <span class=\"glyphicon mdi-device-access-time\"></span> " + secondsTimeSpanToHMS(json.routes[i].duration) + "</br> " + json.routes[i].owner.nickname + " </div> <div class=\"panel-body\" style=\"background-color:#f5f5f5\"> <img class=\"img-responsive\" src=\""+json.routes[i].imgUrl+"&size=300x300\"></div></div></div></a>");
+	$('#routesRow').append("<a href=\"itineraries/"+json.routes[i].id+"\"><div class=\"col-xs-4\"> <div class=\"panel panel-"+json.routes[i].type+"\"> <div class=\"panel-heading\"> <h3 class=\"panel-title\"><b>" + json.routes[i].name + "</b></h3> <span class=\"glyphicon mdi-maps-directions-car\"></span>"+ json.routes[i].length/1000 + " Km.    <span class=\"glyphicon mdi-device-access-time\"></span> " + secondsTimeSpanToHMS(json.routes[i].duration) + "</br> " + json.routes[i].owner.nickname + " </div> <div class=\"panel-body\"> <img class=\"img-responsive\" src=\""+json.routes[i].imgUrl+"&size=300x300\"></div></div></div></a>");
 	}
 	
 	for(i=0;i<json.events.length;i++){
