@@ -171,7 +171,7 @@ function setDestinations(){
 
 function createGPX(data) {
 	
-	renderNarrative(data);
+	displayNarrative(data);
    var gpxString='';
         gpxString += "<? xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"no\"?>\n" +
                 "<gpx\n" +

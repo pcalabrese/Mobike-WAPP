@@ -19,7 +19,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
 	<script src="/WAPP/js/jquery.nouislider.all.js"></script>
   	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
-  	<script src="http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq"></script>
+  	<!-- <script src="http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq"></script>  -->
+  	<script src="http://open.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=Fmjtd%7Cluu829ubng%2C80%3Do5-9w1gu4"></script>
   
   <script src="/WAPP/js/logout.js" type="text/javascript"></script>
   
