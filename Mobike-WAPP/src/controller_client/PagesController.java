@@ -119,6 +119,8 @@ public class PagesController {
 			outputOBJ.put("route", new JSONObject(crypter.decrypt(jsonreceived.getString("route"))));
 			outputOBJ.put("user", new JSONObject(crypter.decrypt(userToken)));
 			outputOBJ.put("gpx", jsonreceived.getString("gpx"));
+			
+			
 		} catch (Exception e) {
 			return Response.status(500).build();
 		}
