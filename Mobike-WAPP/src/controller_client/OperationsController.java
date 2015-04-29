@@ -262,14 +262,9 @@ public class OperationsController {
 			ObjectMapper mapper = new ObjectMapper();
 			String output = wr.path("/routes").path("/create").type(MediaType.APPLICATION_JSON).post(String.class, mapper.writeValueAsString(map));
 			
-			URI uri = null;
-			try {
-				uri = new URI("./itineraries/".concat(output));
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return Response.seeOther(uri).build();
+			
+			
+			return Response.ok(output).build();
 			
 			
 		} catch (Exception e1) {

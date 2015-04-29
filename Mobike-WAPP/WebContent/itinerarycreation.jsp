@@ -138,7 +138,7 @@
         
        </div>
        <div class= "row">
-       	<div class="col-lg-10">
+       	<div class="col-lg-6">
        	<div class= "well" id="narr" style="display:none">
        	<legend>Route Narrative</legend>
        	<div id="narrative" ></div>

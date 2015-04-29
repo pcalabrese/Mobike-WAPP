@@ -287,7 +287,9 @@ function uploadRoute(){
 			url: "/WAPP/ops/itineraries/insertnew",
 			data: JSON.stringify(json),
 			success: function (data) { 
-				$('#mod-body').text("Thank you! your itinerary has been succesfully saved!"); onUploadCallBack();
+				$('#mod-body').text("Thank you! your itinerary has been succesfully saved!");
+				onUploadCallBack();
+				window.location.assign("/WAPP/itineraries/" + data);
 				
 			},
 			error: function (data) {
