@@ -22,8 +22,6 @@
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="/WAPP/users/profile">Profile</a></li>
-                  <li><a href="#">My Itineraries</a></li>
-                  <li><a href="#">My Events</a></li>
                   <div class="divider"></div> 
                   <li><a href="javascript:logout()">Logout</a></li>
                 </ul>

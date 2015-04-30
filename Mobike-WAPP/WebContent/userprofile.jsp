@@ -46,8 +46,8 @@
      		
       		</div>
      	</div>
-     	<div class="col-xs-9">
-     		
+     	<div class="col-xs-9" style="text-align: -webkit-center; margin-top:40px; ">
+     		<img class="img-responsive" src="/WAPP/img/LOGODEF.png" style="width:50%;height:50%;opacity:0.40;">
      	</div>
     
     
