@@ -227,8 +227,27 @@ public class PagesController {
 	@GET
 	@Path("/androidapp")
 	@Produces(MediaType.TEXT_HTML)
-	public Response androidapp(){
-		return Response.ok(new Viewable("/androidapp.jsp",null)).build();
+	public Response androidapp(@CookieParam("token") String userToken) {
+		
+		Crypter crypter = new Crypter();
+		
+		JSONObject outputOBJ = null;
+		
+		if(userToken != null){
+			System.out.println("usertoken not not null");
+			try {
+				outputOBJ = new JSONObject();
+				outputOBJ.put("user", new JSONObject(crypter.decrypt(userToken)));
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				return Response.status(500).build();
+			}
+		}
+		
+		
+		
+		return  Response.ok(new Viewable("/androidapp.jsp", outputOBJ)).build();
 	}
 	
 	@SuppressWarnings("unused")

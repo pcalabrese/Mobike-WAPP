@@ -292,6 +292,7 @@ public class OperationsController {
 			users = event.getString("invites").split(",");
 			List<String> container = Arrays.asList(users);
 			JSONArray usersOK = new JSONArray();
+			JSONArray usersAcc= new JSONArray();
 			String userResponse = wr.path("/users").path("/retrieveall").queryParam("token", userToken).get(String.class);
 			JSONObject usersDB = new JSONObject(userResponse);
 			String decrypted = crypter.decrypt(usersDB.getString("users"));
@@ -317,7 +318,10 @@ public class OperationsController {
 			event.remove("invites");
 			event.remove("routeId");
 			event.put("owner", userplain);
+			usersOK.put(userplain);
+			usersAcc.put(userplain);
 			event.put("usersInvited", usersOK);
+			event.put("usersAccepted", usersAcc);
 			event.put("route", route);
 			//String newdata = event.getString("startdate").replace('\\', ' ');
 			//System.out.println("datainput:" + event.getString("startdate") + "dataout:" +newdata);
@@ -340,109 +344,7 @@ public class OperationsController {
 	}	
 	}
 	
-	@POST
-	@Path("/events/insertnew")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces("text/html")
-	public Response insertNew(@FormParam("name") String name,
-			@FormParam("description") String description,
-			@FormParam("date") String date, @FormParam("time") String time,
-			@FormParam("startlocation") String startLocation,
-			@FormParam("routeId") String routeId,
-			@FormParam("invites") String invites,
-			@CookieParam("token") String userToken) {
 
-		Crypter crypter = new Crypter();
-		JSONObject object;
-		String creatorId = null;
-		String nickname = null;
-		try {
-			object = new JSONObject(crypter.decrypt(userToken));
-			creatorId = object.getString("id");
-			nickname = object.getString("nickname");
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		
-		String [] users = invites.split(",");
-		List<String> container = Arrays.asList(users);
-		JSONArray usersOK = new JSONArray();
-		String userResponse = wr.path("/users").path("/retrieveall").queryParam("token", userToken).get(String.class);
-		try {
-			JSONObject usersDB = new JSONObject(userResponse);
-			String decrypted = crypter.decrypt(usersDB.getString("users"));
-			JSONArray usersD = new JSONArray(decrypted);
-			
-			for(int i=0;i<container.size();i++){
-				for(int j=0; j<usersD.length();j++){
-					if(container.get(i).equals(usersD.getJSONObject(j).get("nickname"))){
-						usersOK.put(usersD.getJSONObject(j));
-					}
-				}
-			}
-			
-			
-		} catch ( Exception e1) {
-			
-			e1.printStackTrace();
-		}
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date currentDate = new Date();
-		String creationDate = dateFormat.format(currentDate);
-		String date2 = date.replace("-", "/");
-		String dateTime = date2 + " " + time + ":00";
-		JSONObject event = null;
-		
-		try {
-			 event = new JSONObject("{\"owner\":{\"id\":" + creatorId + ", \"nickname\":\""+nickname+"\"}, \"name\":\""
-					+ name + "\", \"description\":\"" + description
-					+ "\", \"route\": {\"id\":"+routeId+ "}, \"startdate\":\""
-					+ dateTime + "\", \"startlocation\":\"" + startLocation
-					+ "\", \"creationdate\":\"" + creationDate + "\"}");
-		} catch (JSONException e1) {
-			
-			e1.printStackTrace();
-		}
-		
-		try {
-			event.put("usersInvited", usersOK);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		Map<String,String> inputmap = new HashMap<String,String>();
-		try {
-			inputmap.put("event", crypter.encrypt(event.toString()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		inputmap.put("user", userToken);
-		
-		ObjectMapper mapper = new ObjectMapper();
-		String inputjson = null;
-		try {
-			inputjson = mapper.writeValueAsString(inputmap);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		ClientResponse response = wr.path("/events").path("/create")
-				.type(MediaType.APPLICATION_JSON)
-				.post(ClientResponse.class, inputjson);
-		String output = response.getEntity(String.class);
-		URI uri = null;
-		try {
-			uri = new URI("./events/".concat(output));
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return Response.seeOther(uri).build();
-	}
 	
 	@POST
 	@Path("/events/participation/{op}")
@@ -467,13 +369,7 @@ public class OperationsController {
 		
 	}
 	
-	
-	
 
-	
-
-	
-	
 	
 	@SuppressWarnings("unchecked")
 	@POST
