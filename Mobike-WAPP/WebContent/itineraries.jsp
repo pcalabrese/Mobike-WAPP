@@ -27,27 +27,14 @@
 	<script src="/WAPP/js/itineraries.js"></script>
   	<script src="/WAPP/js/logout.js"></script>
   	
-  	
-   
-  
 </head>
 
 <body>
 	
-	
-	
-	
   <navbar></navbar>
-  
-  <a class="btn shadow-level4 btn-primary  btn-fab mdi-content-add"
-          style="position: fixed;z-index:9999;
-    bottom: 5%;
-    right: 2%;" href="/WAPP/itineraries/new"></a>
-          
-    
     
 <div class="container" style="padding-top:60px;">
-  <div class="row">
+  <div class="row" style="padding-top: 20px">
     <div class="col-xs-4">
       <div class="well">
         <form class="form-horizontal">
@@ -196,21 +183,19 @@
           </fieldset>
         </form>
       </div>
-    
-    
+ 
     <div class="col-xs-8" style="padding-top:25px">
       <div class="list-group">
 
       </div>
     </div>
-  </div>
+  </div> 
   
-  
-  
-  
-  
-  
-  
+  <a id="newbtn" class="btn shadow-level4 btn-primary  btn-fab mdi-content-add"
+          style="position: fixed;z-index:9999;
+    bottom: 5%;
+    right: 2%;"></a>
+    
   <footer></footer>
     
  </div>   

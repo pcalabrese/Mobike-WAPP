@@ -275,6 +275,100 @@ public class OperationsController {
 	}
 	
 	@POST
+	@Path("/events/newevent")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces("text/html")
+	public Response insertNewAjax(String json, @CookieParam("token") String userToken){
+		
+		Crypter crypter = new Crypter();
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> mapEventIn = null;
+		JSONObject userplain = null;
+		
+		JSONObject js = new JSONObject(json);
+		String [] users = js.getString("invites").split(",");
+		
+		List<String> container = Arrays.asList(users);
+		JSONArray usersOK = new JSONArray();
+		String userResponse = wr.path("/users").path("/retrieveall").queryParam("token", userToken).get(String.class);
+		try {
+			JSONObject usersDB = new JSONObject(userResponse);
+			String decrypted = crypter.decrypt(usersDB.getString("users"));
+			JSONArray usersD = new JSONArray(decrypted);
+			
+			for(int i=0;i<container.size();i++){
+				for(int j=0; j<usersD.length();j++){
+					if(container.get(i).equals(usersD.getJSONObject(j).get("nickname"))){
+						usersOK.put(usersD.getJSONObject(j));
+					}
+				}
+			}
+		} catch ( Exception e1) {
+			
+			e1.printStackTrace();
+		}
+		JSONObject event = null;
+		userplain = new JSONObject(crypter.decrypt(userToken));
+		String creatorId = userplain.getString("id");
+		String nickname = userplain.getString("nickname");
+		String name = js.getString("name");
+		String description = js.getString("description");
+		String dateTime = js.getString("dateTime");
+		String dateTTime = js.getString("dateTTime");
+		String creationDate = js.getString("creationDate");
+		String routeId = js.getString("routeId");
+		String startLoc= js.getString("startlocation");
+		
+		try {
+			 event = new JSONObject("{\"owner\":{\"id\":" + creatorId + ", \"nickname\":\""+nickname+"\"}, \"name\":\""
+					+ name + "\", \"description\":\"" + description
+					+ "\", \"route\": {\"id\":"+routeId+ "}, \"startdate\":\""
+					+ dateTime + "\", \"startlocation\":\"" + startLoc
+					+ "\", \"creationdate\":\"" + creationDate + "\"}");
+		} catch (JSONException e1) {
+			
+			e1.printStackTrace();
+		}
+		
+		try {
+			event.put("usersInvited", usersOK);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		Map<String,String> inputmap = new HashMap<String,String>();
+		try {
+			inputmap.put("event", crypter.encrypt(event.toString()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		inputmap.put("user", userToken);
+	
+		String inputjson = null;
+		try {
+			inputjson = mapper.writeValueAsString(inputmap);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		ClientResponse response = wr.path("/events").path("/create")
+				.type(MediaType.APPLICATION_JSON)
+				.post(ClientResponse.class, inputjson);
+		String output = response.getEntity(String.class);
+		URI uri = null;
+		try {
+			uri = new URI("./events/".concat(output));
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Response.seeOther(uri).build();
+	}
+	
+	@POST
 	@Path("/events/insertnew")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces("text/html")

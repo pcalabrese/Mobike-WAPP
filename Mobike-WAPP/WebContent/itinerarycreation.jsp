@@ -155,14 +155,14 @@
         				
     <div id="floatbuttons" style="position: fixed; bottom:5%; right:5%">
   
-  <a  id="displaynarr" class="btn btn-success btn-fab btn-raised mdi-action-list" style="position: relative;z-index:9999; left: 90%;"></a>
+  <a  id="displaynarr" class="btn btn-success btn-fab shadow-level4 mdi-action-list" style="position: relative;z-index:9999; left: 90%;"></a>
   
   <br/>
   <br/>
-  <a  id="saveroute" class="btn btn-primary btn-fab btn-raised mdi-content-save" style="position: relative;z-index:9999; left: 90%;"></a>
+  <a  id="saveroute" class="btn btn-primary btn-fab shadow-level4 mdi-content-save" style="position: relative;z-index:9999; left: 90%;"></a>
   <br/>
   <br/>  
-  <a  id="reset" class="btn btn-danger btn-fab btn-raised mdi-navigation-close" style="position: relative;z-index:9999; left: 90%;"></a>
+  <a  id="reset" class="btn btn-danger btn-fab shadow-level4 mdi-navigation-close" style="position: relative;z-index:9999; left: 90%;"></a>
   </div>
   
   

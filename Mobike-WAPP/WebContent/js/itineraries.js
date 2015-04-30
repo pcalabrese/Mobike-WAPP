@@ -1,14 +1,22 @@
 $('document').ready(function() {
-					$("navbar").load('./template/navbar.jsp', function() {
+					$("navbar").load('/WAPP/template/navbar.jsp', function() {
 						$('user').append(nickname);
 						$('#mitineraries').addClass("active");
 					});
 					
 					$('footer').load('/WAPP/template/footer.jsp');
 						
-					$.material.init();	
+					$.material.init();
+					
 					printRoutes();
 					$('.form-control').on('keyup change', printRoutes);
+					
+					
+					$('#newbtn').on('click', function(){
+						window.location.assign("/WAPP/itineraries/new");
+					});
+					
+					initTooltip();
 				});
 
 function printRoutes() {
@@ -31,24 +39,28 @@ function printRoutes() {
 									+ "&size=150x150"
 									+ "\" alt=\"icon\"></div><div class=\"row-content\"><div class=\"least-content\">"
 									+ routes[i].owner.nickname
-									+ "</div><h4 class=\"list-group-item-heading\"><a href=\"itineraries/"
+									+ "</div><h4 class=\"list-group-item-heading\"><a href=\"/WAPP/itineraries/"
 									+ routes[i].id
 									+ "\">"
 									+ routes[i].name
 									+ "</a>"
-									+ "</h4><p class=\"list-group-item-text\"><span class=\"mdi-maps-directions-car\" style=\"font-size:18px;\"></span>"
+									+ "</h4><p class=\"list-group-item-text\"><span data-toggle=\"tooltip\" data-original-title=\"Route length\" class=\"mdi-maps-directions-car\" style=\"font-size:18px;\"></span>"
 									+ routes[i].length
 									/ 1000
-									+ "Km. <span class=\"mdi-action-alarm\" style=\"font-size:18px;\"></span>"
+									+ "Km. <span data-toggle=\"tooltip\" data-original-title=\"Route duration\" class=\"mdi-action-alarm\" style=\"font-size:18px;\"></span>"
 									+ secondsTimeSpanToHMS(routes[i].duration)
-									+ " Diff: "
+									+ "<span data-toggle=\"tooltip\" data-original-title=\"Route difficulty\" class=\"mdi-alert-warning\" style=\"font-size:18px; margin-left:10px\"></span>"
 									+ routes[i].difficulty
-									+ " Bends: "
+									+ "<span data-toggle=\"tooltip\" data-original-title=\"Route bends ratio\" class=\"mdi-communication-swap-calls\" style=\"font-size:18px; margin-left:10px\"></span>"
 									+ routes[i].bends
 									+ "</p></div></div><div class=\"list-group-separator\"></div>");
 	}
 };
 
+function initTooltip(){
+    $('span').tooltip();
+ };
+ 
 function secondsTimeSpanToHMS(s) {
 	var h = Math.floor(s / 3600); // Get whole hours
 	s -= h * 3600;

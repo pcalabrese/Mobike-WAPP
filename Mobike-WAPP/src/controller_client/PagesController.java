@@ -152,7 +152,7 @@ public class PagesController {
 		
 		JSONObject outputOBJ = new JSONObject();
 		try {
-			crEventJson = wr.path("/events").path("/retrieveall").queryParam("user", userToken).accept(MediaType.APPLICATION_JSON).get(String.class);
+			crEventJson = wr.path("/events").path("/retrieveallws").queryParam("user", userToken).accept(MediaType.APPLICATION_JSON).get(String.class);
 			JSONObject receivedJson = new JSONObject(crEventJson);
 			outputOBJ.put("events", new JSONArray(crypter.decrypt(receivedJson.getString("events"))));
 			outputOBJ.put("user", new JSONObject(crypter.decrypt(userToken)));
@@ -185,9 +185,25 @@ public class PagesController {
 	@GET
 	@Path("/events/new")
 	@Produces(MediaType.TEXT_HTML)
-	public Viewable eventnew() {
-		return new Viewable("/eventcreation.jsp", null);
+	public Response eventnew(@CookieParam("token") String userToken) {
+			
+		Crypter crypter = new Crypter();
+		JSONObject outputOBJ = null;
+		
+		if(userToken != null){
+			try {
+				outputOBJ = new JSONObject();
+				outputOBJ.put("user", new JSONObject(crypter.decrypt(userToken)));
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				return Response.status(500).build();
+			}
+		}
+		return  Response.ok(new Viewable("/eventcreation.jsp", outputOBJ)).build();
 	}
+	
+	
 	
 	@GET
 	@Path("/contacts")
