@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="icon" type="image/png" href="/WAPP/img/favicon.png"/>
 	<link id="theme-style" rel="stylesheet" href="/WAPP/css/stiledev.css">
 	<link href="/WAPP/css/material.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css"	rel="stylesheet">
@@ -36,8 +37,8 @@
 	
   <navbar></navbar>
   
-  <div class="container-fluid" style="padding-top: 50px;">
-    <div class="row">
+  <div class="container-fluid" style="padding-top: 60px;">
+    <div class="row" style="padding-top:20px;">
      <div class="col-xs-3">
      	<div id="well" class="well">
      		<h1 class="text-center" style="font-style:italic;" id="ititle"></h1>
