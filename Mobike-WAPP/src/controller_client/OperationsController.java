@@ -174,6 +174,7 @@ public class OperationsController {
 
 	}
 	
+	@SuppressWarnings("unused")
 	@POST
 	@Path("/disconnect")
 	public Response disconnectServer(@Context HttpServletRequest request) {
@@ -534,6 +535,7 @@ public class OperationsController {
 			if(response.getStatus()==200){
 				String token = response.getEntity(String.class);
 				ObjectMapper mapmapper = new ObjectMapper();
+				@SuppressWarnings("unused")
 				Map<String, String> map3 = null;
 				map3 = (Map<String, String>) mapmapper.readValue(token,
 						Map.class);

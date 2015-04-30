@@ -16,12 +16,12 @@
               <li id="mevents"><a href="/WAPP/events">Events</a></li>
               <li id="mandroidapp"><a href="/WAPP/androidapp">Android App</a></li>
               <li id="mcontact"><a href="/WAPP/contacts">Contact</a></li>
-              <li class="dropdown">
+              <li class="dropdown" id="muser">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <span class="glyphicon glyphicon-user"></span> <user></user>
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Profile</a></li>
+                  <li><a href="/WAPP/users/profile">Profile</a></li>
                   <li><a href="#">My Itineraries</a></li>
                   <li><a href="#">My Events</a></li>
                   <div class="divider"></div> 

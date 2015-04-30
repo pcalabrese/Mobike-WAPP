@@ -199,7 +199,7 @@ function createGPX(data) {
        
         lat=''+shapepoints[k+0].toFixed(6);
         lng=''+shapepoints[k+1].toFixed(6);
-        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt\n";
+        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n";
        
         for (i=0; i < legs.length; i++) {
             for (j = 0; j < legs[i].maneuvers.length; j++) {

@@ -110,11 +110,11 @@
             				<label for="inputType" class="col-lg-3 control-label">Type</label>
             				<div class="col-lg-9">
                 				<select class="form-control" id="inputType">
-                					<option>Montuoso</option>
-                            		<option>Collinare</option>
-                            		<option>Pianeggiante</option>
-                            		<option>Costiero</option>
-                            		<option>Misto</option>
+                					<option>Mountain</option>
+                            		<option>Hill</option>
+                            		<option>Plain</option>
+                            		<option>Coast</option>
+                            		<option>Mixed</option>
                             	</select>
             				</div>
         				</div>

@@ -4,6 +4,7 @@
   <title>MoBike - Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="icon" type="image/png" href="/WAPP/img/favicon.png"/>
   	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link id="theme-style" rel="stylesheet" href="/WAPP/css/stiledev.css">
 	<link href="/WAPP/css/material.min.css" rel="stylesheet">

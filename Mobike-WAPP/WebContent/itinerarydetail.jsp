@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="icon" type="image/png" href="/WAPP/img/favicon.png"/>
 	<link id="theme-style" rel="stylesheet" href="/WAPP/css/stiledev.css">
 	<link href="/WAPP/css/material.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/ripples.min.css"	rel="stylesheet">
@@ -26,6 +27,7 @@
   <script type="text/javascript">reviews = ${it.get('route').get('reviewList')};</script>
   <script type="text/javascript">nickname = "${it.get('user').get('nickname')}";</script>
   <script type="text/javascript">uid = ${it.get('user').get('id')}</script>
+  <script type="text/javascript">var url = "${it.get('route').get('url')}"; rurl = "/downloads/gpxs/" + url </script>
   
   
   
@@ -35,8 +37,8 @@
 	
   <navbar></navbar>
   
-  <div class="container-fluid" style="padding-top: 50px;">
-    <div class="row">
+  <div class="container-fluid" style="padding-top: 60px;">
+    <div class="row" style="padding-top:20px;">
      <div class="col-xs-3">
      	<div id="well" class="well">
      		<h1 class="text-center" style="font-style:italic;" id="ititle"></h1>
@@ -61,7 +63,7 @@
      				<p>
      					<p id="irating"></p>
      					<span style="font-weight:500;" id="iratingnumber"></span>
-     				</p>
+     				
      				<p style="font-size:18px;"> Difficulty:
      					<span style="font-weight:500;" id="idifficulty"></span>
      				</p>
@@ -69,7 +71,7 @@
      					<span style="font-weight:500;" id="ibends"></span>
      				</p>
      				<div class="btn-group">
-     					<a href="javascript:void(0)" class="btn btn-success">.GPX</a>
+     					<a id="dgpx" class="btn btn-success">.GPX</a>
      					<a href="javascript:void(0)" class="btn btn-default" disabled="">.ITN</a>
      				</div>
      			</div>
@@ -80,23 +82,28 @@
 			<br><br>
 		</div>
     </div>
-    </div>
-    <div class="row"></div>
+    
     <div class="row">
-    	<div class="well well-sm"><strong>Reviews:</strong></div>
+    </div>
+    <div class="row">
+    	<div class="well well-sm">
+    		<strong>
+    			Reviews:
+    		</strong>
+    	</div>
     	<div class="list-group" id="rlist">
-    	
-      
-        </div>
+	 	</div>
+    </div>
+    
     </div>
     
     
    <div id="reviewbutton" style="position: fixed; bottom:5%; right:5%">
-  <br/>
-  <br/>
-  <a  id="newreview" class="btn btn-primary btn-fab btn-raised mdi-content-create" style="position: relative;z-index:9999; left: 90%;"></a>
+  		<br/>
+  		<br/>
+  		<a  id="newreview" class="btn btn-primary btn-fab btn-raised mdi-content-create" style="position: relative;z-index:9999; left: 90%;"></a>
   </div>
-</div>
+
 
 <div id="reviewModal" class="modal fade">
  <div class="modal-dialog">
@@ -138,19 +145,14 @@
     <button type="button" class="btn btn-primary shadow-level2" id="rok" style="display:none">OK</button>
     
     </div>
+    </div>
     </fieldset>
     </form>
    </div>
   </div>
  </div>
-</div>
- 
 
-  
-  
-  
-  
-  
+ 
  <footer></footer>
 </body>
 </html>

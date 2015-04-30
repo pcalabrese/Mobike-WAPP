@@ -1,23 +1,14 @@
 package controller_client;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -26,10 +17,8 @@ import org.codehaus.jettison.json.JSONObject;
 
 import utils.Crypter;
 
-
-
-
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.view.Viewable;
 
@@ -37,7 +26,7 @@ import com.sun.jersey.api.view.Viewable;
 public class PagesController {
 	
 	private static final String BaseURI = "http://mobike.ddns.net/SRV/";
-	private final String BaseWebAppUri = "/WAPP/";
+	// private final String BaseWebAppUri = "/WAPP/";
 	Client client = Client.create();
 	private final WebResource wr = client.resource(BaseURI);
 	
@@ -56,6 +45,7 @@ public class PagesController {
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	@GET
 	@Path("/home")
 	@Produces(MediaType.TEXT_HTML)
@@ -84,6 +74,7 @@ public class PagesController {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@GET
 	@Path("/itineraries")
 	@Produces(MediaType.TEXT_HTML)
@@ -119,6 +110,8 @@ public class PagesController {
 			outputOBJ.put("route", new JSONObject(crypter.decrypt(jsonreceived.getString("route"))));
 			outputOBJ.put("user", new JSONObject(crypter.decrypt(userToken)));
 			outputOBJ.put("gpx", jsonreceived.getString("gpx"));
+			
+			
 		} catch (Exception e) {
 			return Response.status(500).build();
 		}
@@ -236,6 +229,55 @@ public class PagesController {
 	@Produces(MediaType.TEXT_HTML)
 	public Response androidapp(){
 		return Response.ok(new Viewable("/androidapp.jsp",null)).build();
+	}
+	
+	@SuppressWarnings("unused")
+	@GET
+	@Path("/users/profile")
+	@Produces(MediaType.TEXT_HTML)
+	public Response userDetail(@CookieParam("token") String userToken) {
+		Crypter crypter = new Crypter();
+		String plainUser = null;
+		JSONObject user = null;
+		String id = null;
+		try {
+			 plainUser = crypter.decrypt(userToken);
+			 user = new JSONObject(plainUser);
+			 id = user.getString("id");
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return Response.status(500).build();
+		}
+		
+		if(user != null){
+			ClientResponse response = wr.path("/users/getDetails").queryParam("id", id).queryParam("token", userToken).get(ClientResponse.class);
+			
+			if (response.getStatus()==200){
+				try {
+					JSONObject responseEntity = new JSONObject(response.getEntity(String.class));
+					JSONObject outputOBJ = new JSONObject();
+					JSONObject plainUserDetails = new JSONObject(crypter.decrypt(responseEntity.getString("user")));
+					outputOBJ.put("user", plainUserDetails);
+					
+					return Response.ok(new Viewable("/userprofile.jsp", outputOBJ)).build();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					return Response.status(500).build();
+				}
+				
+				
+			}
+			else {
+				return Response.status(response.getStatus()).build();
+			}
+		}
+		else {
+			return Response.status(500).build();
+		}
+		
+		
 	}
 	
 	@GET
