@@ -122,7 +122,7 @@
         				<div class="form-group">
             				<div class="col-lg-9 col-lg-offset-3">
                 				<button class="btn btn-default">Cancel</button>
-                				<button type="button" class="btn btn-primary" id="routeSubmit">GET</button>
+                				<button type="button" class="btn btn-primary shadow-level4" id="routeSubmit">GET</button>
             				</div>
         				</div>
         			</fieldset>

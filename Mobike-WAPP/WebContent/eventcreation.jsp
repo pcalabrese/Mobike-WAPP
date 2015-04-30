@@ -83,7 +83,7 @@
 							<br>
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-4">
-									<button id="resetbtn" class="btn btn-primary btn-lg">Reset</button>
+									<button id="resetbtn" class="btn btn-primary btn-lg shadow-level4">Reset</button>
 								</div>
 							</div>
 
