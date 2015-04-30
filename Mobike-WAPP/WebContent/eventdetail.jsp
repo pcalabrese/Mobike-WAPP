@@ -16,14 +16,17 @@
   
   
   <script type="text/javascript">
+  	event = ${it.get('event')};
   	rimgurl = "${it.get('event').get('route').get('imgUrl')}";
-  	rid = ${it.get('event').get('route').get('id')};
+  	rid = parseInt("${it.get('event').get('route').get('id')}");
   	usersA = ${it.get('event').get('usersAccepted')};
   	usersI = ${it.get('event').get('usersInvited')};
   	usersR = ${it.get('event').get('usersRefused')};
   	id= ${it.get('event').get('id')};
+  	nickname = "${it.get('user').get('nickname')}";
+  	ustate = ${it.get('event').get('userState')};
   </script>
-   <script src="/WAPP/js/Logout.js"></script>
+   <script src="/WAPP/js/logout.js"></script>
    <script src="/WAPP/js/eventdetail.js"></script>
   <script>
     $(document).ready(function() {
@@ -73,8 +76,8 @@
 
     </div>
     <div class="col-lg-8" style="padding-top:20px;text-align: -webkit-center;">
-    <a id="rimagelink" target="_blank">
-    	<img id="rimage" class="img-responsive">
+    <a id="rimageurl" target="_blank">
+    	<img id="rimage" class="img-responsive" >
     	
     </a>
     
@@ -137,6 +140,33 @@
   </div>
   
   <footer></footer>
+  
+  
+  <div id="partModal" class="modal fade">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Write a Review</h4>
+   </div>
+   <form>
+   <fieldset>
+   <div id="mod-body" class="modal-body">
+        
+   </div>
+   <div class="form-group">
+   <div id="mod-footer" class="modal-footer">
+    
+    <button type="button" class="btn btn-primary shadow-level2" id="pclose">OK</button>
+    
+    
+    </div>
+    </div>
+    </fieldset>
+    </form>
+   </div>
+  </div>
+ </div>
   
 
  

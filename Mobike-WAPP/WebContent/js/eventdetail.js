@@ -16,6 +16,19 @@ $(document).ready(function(){
 	printTable("#accepted", usersA, "success");
 	printTable("#invited", usersI, "info");
 	printTable("#refused", usersR, "danger");
+	
+	$('#pclose').on('click',function(){
+		$('#partModal').modal('hide');
+		window.location.reload();
+	});
+	
+	if(ustate != 0 ){
+		$('#participation').show();
+	}
+	else {
+		$('#participation').hide();
+	}
+	
 });
 
 function printTable(selector, array, style){
@@ -38,10 +51,12 @@ function accept(){
 		  data: json,
 		  contentType: 'application/json',
 		  success: function(){
-			  alert ("You're in!");
-			  window.location.reload();
+			  $('#partModal').modal('show');
+			  $('#mod-body').text("You have accepted!, Have a Nice Ride!!");
+			  
 		  },
-		  error: function(){alert("error");},
+		  error: function(){$('#partModal').modal('show');
+		  $('#mod-body').text("Sorry, we encountered an error, please try again!");},
 		  failure: function(){alert("failure");}
 		 
 		});
@@ -55,11 +70,14 @@ function decline(){
 		  data: json,
 		  contentType: 'application/json',
 		  success: function(){
-			  alert ("You're out !");
-			  window.location.reload();
+			  $('#partModal').modal('show');
+			  $('#mod-body').text("You have declined!  :( !!");
+			  
 		  },
-		  error: function(){alert("error");},
+		  error: function(){$('#partModal').modal('show');
+		  $('#mod-body').text("Sorry, we encountered an error, please try again!");},
 		  failure: function(){alert("failure");}
 		 
 		});
 }
+
