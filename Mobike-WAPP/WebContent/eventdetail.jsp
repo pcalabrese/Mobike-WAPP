@@ -17,7 +17,7 @@
   
   <script type="text/javascript">
   	event = ${it.get('event')};
-  	rimgurl = "${it.get('event').get('route').get('imgUrl')}";
+  	route = ${it.get('event').get('route')};
   	rid = parseInt("${it.get('event').get('route').get('id')}");
   	usersA = ${it.get('event').get('usersAccepted')};
   	usersI = ${it.get('event').get('usersInvited')};
@@ -77,7 +77,7 @@
     </div>
     <div class="col-lg-8" style="padding-top:20px;text-align: -webkit-center;">
     <a id="rimageurl" target="_blank">
-    	<img id="rimage" class="img-responsive" >
+    	
     	
     </a>
     

@@ -11,7 +11,7 @@ $(document).ready(function(){
 	$.material.init();
 	$('#rimageurl').attr('href', '/WAPP/itineraries/'+rid);
 	
-	$('#rimage').attr('src', rimgurl+'&size=500x500');
+	$('#rimageurl').append('<img class=img-responsive src="'+route.imgUrl+'&size=500x500">');
 	
 	printTable("#accepted", usersA, "success");
 	printTable("#invited", usersI, "info");
