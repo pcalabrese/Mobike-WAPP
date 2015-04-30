@@ -174,7 +174,6 @@ public class OperationsController {
 
 	}
 	
-	@SuppressWarnings("unused")
 	@POST
 	@Path("/disconnect")
 	public Response disconnectServer(@Context HttpServletRequest request) {
@@ -277,96 +276,68 @@ public class OperationsController {
 	
 	@POST
 	@Path("/events/newevent")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces("text/html")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response insertNewAjax(String json, @CookieParam("token") String userToken){
 		
 		Crypter crypter = new Crypter();
 		ObjectMapper mapper = new ObjectMapper();
-		Map<String, String> mapEventIn = null;
 		JSONObject userplain = null;
-		
-		JSONObject js = new JSONObject(json);
-		String [] users = js.getString("invites").split(",");
-		
-		List<String> container = Arrays.asList(users);
-		JSONArray usersOK = new JSONArray();
-		String userResponse = wr.path("/users").path("/retrieveall").queryParam("token", userToken).get(String.class);
+		String[] users = null;
+		JSONObject event = null;
+		JSONObject route;
+		Map<String,String> inputmap = new HashMap<String,String>();
 		try {
+			event = new JSONObject(json);
+			users = event.getString("invites").split(",");
+			List<String> container = Arrays.asList(users);
+			JSONArray usersOK = new JSONArray();
+			String userResponse = wr.path("/users").path("/retrieveall").queryParam("token", userToken).get(String.class);
 			JSONObject usersDB = new JSONObject(userResponse);
 			String decrypted = crypter.decrypt(usersDB.getString("users"));
 			JSONArray usersD = new JSONArray(decrypted);
+			route = new JSONObject();
+			route.put("id", event.get("routeId"));
 			
+			System.out.println("cont:"+container.toString());
+			System.out.println("usersd:"+usersD.toString());
 			for(int i=0;i<container.size();i++){
 				for(int j=0; j<usersD.length();j++){
-					if(container.get(i).equals(usersD.getJSONObject(j).get("nickname"))){
+					if(container.get(i).toLowerCase().replace(" ","").equals(usersD.getJSONObject(j).get("nickname").toString().toLowerCase())){
 						usersOK.put(usersD.getJSONObject(j));
+						System.out.println(usersD.getString(j));
+						
 					}
 				}
 			}
-		} catch ( Exception e1) {
-			
-			e1.printStackTrace();
-		}
-		JSONObject event = null;
-		userplain = new JSONObject(crypter.decrypt(userToken));
-		String creatorId = userplain.getString("id");
-		String nickname = userplain.getString("nickname");
-		String name = js.getString("name");
-		String description = js.getString("description");
-		String dateTime = js.getString("dateTime");
-		String dateTTime = js.getString("dateTTime");
-		String creationDate = js.getString("creationDate");
-		String routeId = js.getString("routeId");
-		String startLoc= js.getString("startlocation");
-		
-		try {
-			 event = new JSONObject("{\"owner\":{\"id\":" + creatorId + ", \"nickname\":\""+nickname+"\"}, \"name\":\""
-					+ name + "\", \"description\":\"" + description
-					+ "\", \"route\": {\"id\":"+routeId+ "}, \"startdate\":\""
-					+ dateTime + "\", \"startlocation\":\"" + startLoc
-					+ "\", \"creationdate\":\"" + creationDate + "\"}");
-		} catch (JSONException e1) {
-			
-			e1.printStackTrace();
-		}
-		
-		try {
+			System.out.println("usercriptato:" + userToken);
+			userplain = new JSONObject(crypter.decrypt(userToken));
+			System.out.println(userplain);
+			System.out.println(event.get("invites"));
+			event.remove("invites");
+			event.remove("routeId");
+			event.put("owner", userplain);
 			event.put("usersInvited", usersOK);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		Map<String,String> inputmap = new HashMap<String,String>();
-		try {
+			event.put("route", route);
+			//String newdata = event.getString("startdate").replace('\\', ' ');
+			//System.out.println("datainput:" + event.getString("startdate") + "dataout:" +newdata);
+			//event.put("startdate", newdata);
+			
+			
+			System.out.println(event.toString());
 			inputmap.put("event", crypter.encrypt(event.toString()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		inputmap.put("user", userToken);
-	
-		String inputjson = null;
-		try {
-			inputjson = mapper.writeValueAsString(inputmap);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			inputmap.put("user", userToken);
+			
+			String output = wr.path("/events").path("/create").type(MediaType.APPLICATION_JSON).post(String.class, mapper.writeValueAsString(inputmap));
 
-		ClientResponse response = wr.path("/events").path("/create")
-				.type(MediaType.APPLICATION_JSON)
-				.post(ClientResponse.class, inputjson);
-		String output = response.getEntity(String.class);
-		URI uri = null;
-		try {
-			uri = new URI("./events/".concat(output));
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return Response.seeOther(uri).build();
+		
+			return Response.ok(output).build();
+			
+		} catch (Exception e1) {
+		
+		e1.printStackTrace();
+		return Response.status(500).build();
+	}	
 	}
 	
 	@POST
@@ -535,7 +506,6 @@ public class OperationsController {
 			if(response.getStatus()==200){
 				String token = response.getEntity(String.class);
 				ObjectMapper mapmapper = new ObjectMapper();
-				@SuppressWarnings("unused")
 				Map<String, String> map3 = null;
 				map3 = (Map<String, String>) mapmapper.readValue(token,
 						Map.class);
