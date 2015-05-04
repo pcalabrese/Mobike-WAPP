@@ -69,7 +69,7 @@
             <div class="block">
                 
                 <div class="text-center">
-                    <a class="btn btn-primary btn-lg shadow-level4" href="./img/app-debug.apk">
+                    <a class="btn btn-primary btn-lg shadow-level4" href="https://play.google.com/store/apps/details?id=com.mobiketeam.mobike&hl=it">
                       <span class="mdi-file-file-download"></span> Download</a>
                 </div>
             </div><!--//block-->   

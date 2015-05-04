@@ -128,7 +128,7 @@
 					<div class="col-xs-4"></div>
 					<div class="col-xs-4">
 						<div class="text-center">
-							<a href="../downloads/app/app-debug.apk"><img class="img-rounded"
+							<a href="https://play.google.com/store/apps/details?id=com.mobiketeam.mobike&hl=it"><img class="img-rounded"
 								style="width: 175px; height: 80px; padding-top: 20px;"
 								src="./img/androidown.png"></a>
 						</div>
