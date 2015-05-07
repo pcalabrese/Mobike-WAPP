@@ -29,6 +29,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/ripples.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.min.js"></script>
 
+
+	<script src="/WAPP/js/language.js"></script>
 	<script src="/WAPP/js/landing.js"></script>
 	 <script type="text/javascript" src="/WAPP/js/jquery.cookiebar.js"></script>
 	
@@ -96,20 +98,20 @@
     <div class="row">
       <div class="col-md-4 text-center">
         <img  src="./img/map.png">
-        <h2>Expand your ways</h2>
-        <p>Give more space to your rides, create and share events with our community.</p>
+        <h2 id="title1"></h2>
+        <p id="subTitle1"></p>
       </div>
                     
       <div class="col-md-4 text-center">
         <img class="img-circle" src="./img/event.png">
-        <h2>Organize the Passion</h2>
-        <p>With an intuitive way to create and join events, every weekend will be memorable.</p>
+        <h2 id="title2"></h2>
+        <p id="subTitle2"></p>
       </div><!-- coloumn-->
                 
       <div class="col-md-4 text-center">
         <img src="./img/Android.png">
-        <h2>Always with you</h2>
-        <p>A user-friendly app, so you will never brake your enthusiasm.</p>
+        <h2 id="title3"></h2>
+        <p id="subTitle3"></p>
       </div><!-- coloumn-->
     </div><!-- row-->
   </div><!--//container-->
@@ -122,10 +124,11 @@
 	<section id="android-app" class="androidapp section">
 		<div class="container">
 			<div class="text-center">
-				<h2 class="text-center">Bring your passion in your pocket</h2>
+				<h2 id="appTitle" class="text-center"></h2>
 				<p style="font-size: 19px; padding-top: 15px;">
-					Record new Itineraries live, share them with your friends, manage
-					your Events</br> and start a new ride, all with your smartphone!
+					<span id="appDesc1"></span>
+					</br>
+					<span id="appDesc2"></span>
 				</p>
 
 				<div class="row">
@@ -163,10 +166,10 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
-					<h4 class="modal-title">Welcome to Mobike!</h4>
+					<h4 id="modalWelc" class="modal-title">Welcome to Mobike!</h4>
 				</div>
 				<div class="modal-body">
-					<p>Please choose a nickname and insert your Bike Model to
+					<p id="modalNick">Please choose a nickname and insert your Bike Model to
 						create an account</p>
 
 					<label for="inputNickname" class="col-lg-2 control-label">Nickname</label>
@@ -175,14 +178,14 @@
 							placeholder="Nickname" type="text">
 					</div>
 
-					<label for="inputBikeModel" class="col-lg-2 control-label">Bike:</label>
+					<label for="inputBikeModel" class="col-lg-2 control-label" id="modalMoto">Bike:</label>
 					<div class="col-lg-10">
 						<input class="form-control" id="inputBikeModel"
 							placeholder="Your Bike Model" type="text">
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="modalClose">Close</button>
 					<button type="button" id="regSubmit" class="btn btn-primary">Save
 						changes</button>
 				</div>
@@ -202,7 +205,7 @@
 					<h4 class="modal-title">Sorry!</h4>
 				</div>
 				<div class="modal-body">
-					<p>Authentication Failed, please reload the page and try again!</p>	
+					<p id="modalErr">Authentication Failed, please reload the page and try again!</p>	
 				</div>
 				<div class="modal-footer">
 					<button type="button" id="errSubmit" class="btn btn-primary">OK</button>

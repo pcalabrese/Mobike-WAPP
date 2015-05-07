@@ -1,9 +1,13 @@
 $('document').ready(function(){
-	$("navbar").load('./template/navbar-landing.html');
+	
+	$("navbar").load('./template/navbar-landing.html',function(){
+		var xmlname = "landing.xml";
+		setLang(xmlname)} );
 	
 	$('footer').load('/WAPP/template/footer.jsp');
 	$.material.init();
 	$.cookieBar();
+	
 	
 	
 });

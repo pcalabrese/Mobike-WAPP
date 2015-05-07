@@ -2,9 +2,9 @@ $('document').ready(function() {
 					$("navbar").load('./template/navbar.jsp', function() {
 						$('user').append(nickname);
 					});
-					var pagename = "index.xml";
+					var xmlname = "index.xml";
 					$('footer').load('/WAPP/template/footer.jsp');
-					setLang(pagename);
+					setLang(xmlname);
 					$.material.init();
 					console.log(routes.length);
 

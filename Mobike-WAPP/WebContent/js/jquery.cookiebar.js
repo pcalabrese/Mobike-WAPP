@@ -93,13 +93,13 @@
 			var message = options.message.replace('{policy_url}',options.policyURL);
 			
 			if(options.acceptButton){
-				var acceptButton = '<a href="" class="cb-enable">'+options.acceptText+'</a>';
+				var acceptButton = '<a href="" class="cb-enable" id="cookieacc">'+options.acceptText+'</a>';
 			}else{
 				var acceptButton = '';
 			}
 			//Sets up disable/decline button if required
 			if(options.declineButton){
-				var declineButton = '<a href="" class="cb-disable">'+options.declineText+'</a>';
+				var declineButton = '<a href="" class="cb-disable" id="cookiedec">'+options.declineText+'</a>';
 			}else{
 				var declineButton = '';
 			}
@@ -128,9 +128,9 @@
 			//Displays the cookie bar if arguments met
 			if(options.forceShow || cookieValue=='enabled' || cookieValue==''){
 				if(options.append){
-					$(options.element).append('<div id="cookie-bar"'+fixed+zindex+'><p>'+message+acceptButton+declineButton+policyButton+'</p></div>');
+					$(options.element).append('<div id="cookie-bar"'+fixed+zindex+'><p>'+'<span id="cookiemsg">'+message+'</span>'+acceptButton+declineButton+policyButton+'</p></div>');
 				}else{
-					$(options.element).prepend('<div id="cookie-bar"'+fixed+zindex+'><p>'+message+acceptButton+declineButton+policyButton+'</p></div>');
+					$(options.element).prepend('<div id="cookie-bar"'+fixed+zindex+'><p>'+'<span id="cookiemsg">'+message+'</span>'+acceptButton+declineButton+policyButton+'</p></div>');
 				}
 			}
 			

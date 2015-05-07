@@ -2,10 +2,10 @@
  * 
  */
 
-function setLang(pagename) {
+function setLang(xmlname) {
 	var language = 'ita';
 	$.ajax({
-		url : '/WAPP/languages/' + pagename,
+		url : '/WAPP/languages/' + xmlname,
 		success : function(xml) {
 			$(xml).find('translation').each(function() {
 				var id = $(this).attr('id');
