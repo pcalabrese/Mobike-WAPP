@@ -19,8 +19,10 @@
 	<script type="text/javascript">var json = ${it};</script>
 	<script type="text/javascript">nickname = "${it.get('user').get('nickname')}";</script>
 	<script type="text/javascript">routes = ${it.get('routes')};</script>
+	<script src="/WAPP/js/language.js"></script>
   	<script src="/WAPP/js/logout.js"></script>
  	<script src="/WAPP/js/index.js"></script>
+ 	
  	
 </head>
 

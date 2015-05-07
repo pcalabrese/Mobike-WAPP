@@ -2,9 +2,9 @@ $('document').ready(function() {
 					$("navbar").load('./template/navbar.jsp', function() {
 						$('user').append(nickname);
 					});
-
+					var pagename = "index.xml";
 					$('footer').load('/WAPP/template/footer.jsp');
-					setLang();
+					setLang(pagename);
 					$.material.init();
 					console.log(routes.length);
 
@@ -51,23 +51,6 @@ function secondsTimeSpanToHMS(s) {
 																			// and
 																			// seconds
 }
-function setLang() {
-    var language = 'ita';
-    $.ajax({
-        url: '/WAPP/languages/index.xml',
-        success: function(xml) {
-            $(xml).find('translation_index').each(function(){
-                var id = $(this).attr('id');
-                var text = $(this).find(language).text();
-                $("#" + id).html(text);
-            });
-            $(xml).find('translation_nav').each(function(){
-                var id = $(this).attr('id');
-                var text = $(this).find(language).text();
-                $("#" + id).html(text);
-            });
-        }
-    });
-};
+
 
 

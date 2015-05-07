@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+    
+	<translation id="navItn">
+		<eng>Itineraries</eng>
+		<ita>Itinerari</ita>
+	</translation>
+
+	<translation id="navEve">
+		<eng>Events</eng>
+		<ita>Eventi</ita>
+	</translation>
+
+	<translation id="navCon">
+		<eng>Contact Us</eng>
+		<ita>Contattaci</ita>
+	</translation>
+
+	<translation id="navAnd">
+		<eng>Android App</eng>
+		<ita>Android App</ita>
+	</translation>
+
+	<translation id="navPro">
+		<eng>Profile</eng>
+		<ita>Profilo</ita>
+	</translation>
+
+	<translation id="navLogout">
+		<eng>Logout</eng>
+		<ita>Disconnetti</ita>
+	</translation>
+	
+</translations>  

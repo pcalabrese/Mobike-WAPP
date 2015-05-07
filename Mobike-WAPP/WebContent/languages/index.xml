@@ -1,62 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translations>
-    <translation_index id="titleItn">
-        <eng>Expand your horizons!</eng>
-        <ita>Espandi i tuoi orizzonti!</ita>
-    </translation_index>
     
-     <translation_index id="subTitleItn">
-        <eng>Get inspired by our users' Itineraries.</eng>
-        <ita>Prendi ispirazione dagli itinerari dei nostri utenti.</ita>
-    </translation_index>
-    
-     <translation_index id="titleEvents">
-        <eng>Organize your passion</eng>
-        <ita>Metti in mostra la tua passione</ita>
-    </translation_index>
-    
-     <translation_index id="subTitleEvents">
-        <eng>Discover the last Events created by the MoBike community.</eng>
-        <ita>Scopri gli ultimi Eventi creati dalla nostra comunità.</ita>
-    </translation_index>
-    
-     <translation_index id="btnItn">
-        <eng>Go To Itineraries</eng>
-        <ita>Scopri gli Itinerari</ita>
-    </translation_index>
-    
-     <translation_index id="btnEvents">
-        <eng>Go To Events</eng>
-        <ita>Scopri gli Eventi</ita>
-    </translation_index>
-    
-    <translation_nav id="navItn">
-        <eng>Itineraries</eng>
-        <ita>Itinerari</ita>
-    </translation_nav>
-    
-    <translation_nav id="navEve">
-        <eng>Events</eng>
-        <ita>Eventi</ita>
-    </translation_nav>
-    
-    <translation_nav id="navCon">
-        <eng>Contact Us</eng>
-        <ita>Contattaci</ita>
-    </translation_nav>
-    
-    <translation_nav id="navAnd">
-        <eng>Android App</eng>
-        <ita>Android App</ita>
-    </translation_nav>
-    
-    <translation_nav id="navPro">
-        <eng>Profile</eng>
-        <ita>Profilo</ita>
-    </translation_nav>
-    
-    <translation_nav id="navLogout">
-        <eng>Logout</eng>
-        <ita>Disconnetti</ita>
-    </translation_nav>
+	<translation id="titleItn">
+		<eng>Expand your horizons!</eng>
+		<ita>Espandi i tuoi orizzonti!</ita>
+	</translation>
+
+	<translation id="subTitleItn">
+		<eng>Get inspired by our users' Itineraries.</eng>
+		<ita>Prendi ispirazione dagli itinerari dei nostri utenti.</ita>
+	</translation>
+
+	<translation id="titleEvents">
+		<eng>Organize your passion</eng>
+		<ita>Metti in mostra la tua passione</ita>
+	</translation>
+
+	<translation id="subTitleEvents">
+		<eng>Discover the last Events created by the MoBike community.</eng>
+		<ita>Scopri gli ultimi Eventi creati dalla nostra comunità.</ita>
+	</translation>
+
+	<translation id="btnItn">
+		<eng>Go To Itineraries</eng>
+		<ita>Scopri gli Itinerari</ita>
+	</translation>
+
+	<translation id="btnEvents">
+		<eng>Go To Events</eng>
+		<ita>Scopri gli Eventi</ita>
+	</translation>
+	
 </translations>
