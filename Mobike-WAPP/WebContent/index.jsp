@@ -19,8 +19,9 @@
 	<script type="text/javascript">var json = ${it};</script>
 	<script type="text/javascript">nickname = "${it.get('user').get('nickname')}";</script>
 	<script type="text/javascript">routes = ${it.get('routes')};</script>
-  <script src="/WAPP/js/logout.js"></script>
-  <script src="/WAPP/js/index.js"></script>
+  	<script src="/WAPP/js/logout.js"></script>
+ 	<script src="/WAPP/js/index.js"></script>
+ 	
 </head>
 
 <body>
@@ -30,8 +31,9 @@
     <div class="corpo">
     <div class="container">           
         <div class="row" style="padding-top:20px">
-            <h2 align="center">Expand your horizons!</br>
-              <small>Get inspired by our users' Itineraries.</small>
+            <h2 align="center">
+            <div id="titleItn"></div>
+              <small id="subTitleItn"></small>
             </h2>
          <br>
         </div>
@@ -41,14 +43,15 @@
 			
 			</div>
 			<div class="text-center">
-            <a href="itineraries" class="btn btn-primary shadow-level3" role="button">Go To Itineraries</a>
+            <a href="itineraries" class="btn btn-primary shadow-level3" role="button" id="btnItn"></a>
         	</div>
 			</div>
         <br>
         
         <div class="row">
-                <h2 align="center">Organize your passion</br>
-                <small>Discover the last Events created by the MoBike community.</small></h2>      
+                <h2 align="center">
+                <div id="titleEvents"></div>
+                <small id="subTitleEvents"></small></h2>      
         </div>
         
         <br>
@@ -57,7 +60,7 @@
              
         </div>
         <div class="text-center">
-            <a href="events" class="btn btn-primary shadow-level3" role="button">Go to Events</a>
+            <a href="events" class="btn btn-primary shadow-level3" role="button" id="btnEvents"></a>
             
           
         </div>

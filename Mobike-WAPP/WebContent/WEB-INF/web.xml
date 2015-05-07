@@ -31,7 +31,7 @@
     
     <init-param>
         <param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name>
-        <param-value>/(template|img|css|js|fonts)/.*</param-value>
+        <param-value>/(template|languages|img|css|js|fonts)/.*</param-value>
     </init-param>
     
     <init-param>

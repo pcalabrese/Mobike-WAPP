@@ -12,18 +12,18 @@
             <ul class="nav navbar-nav">
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li id="mitineraries"><a href="/WAPP/itineraries">Itineraries</a></li>
-              <li id="mevents"><a href="/WAPP/events">Events</a></li>
-              <li id="mandroidapp"><a href="/WAPP/androidapp">Android App</a></li>
-              <li id="mcontact"><a href="/WAPP/contacts">Contact</a></li>
+              <li id="mitineraries"><a href="/WAPP/itineraries"><div id="navItn"></div></a></li>
+              <li id="mevents"><a href="/WAPP/events"><div id="navEve"></div></a></li>
+              <li id="mandroidapp"><a href="/WAPP/androidapp"><div id="navAnd"></div></a></li>
+              <li id="mcontact"><a href="/WAPP/contacts"><div id="navCon"></div></a></li>
               <li class="dropdown" id="muser">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <span class="glyphicon glyphicon-user"></span> <user></user>
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="/WAPP/users/profile">Profile</a></li>
+                  <li><a href="/WAPP/users/profile"><div id="navPro"></div></a></li>
                   <div class="divider"></div> 
-                  <li><a href="javascript:logout()">Logout</a></li>
+                  <li><a href="javascript:logout()"><div id="navLogout"></div></a></li>
                 </ul>
               </li>
             </ul>
