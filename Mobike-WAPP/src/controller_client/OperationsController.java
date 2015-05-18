@@ -448,6 +448,33 @@ public class OperationsController {
 		}
 	}
 	
+	@GET
+	@Path("/users/retrieveall")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUsers(@CookieParam("token") String userToken){
+		Crypter crypter = new Crypter();
+		JSONObject jsonReceived, jsonOutput;
+		
+		ClientResponse response = wr.path("/users/retrieveall").queryParam("token", userToken).get(ClientResponse.class);
+		
+		if(response.getStatus() == 200){
+			try{
+				jsonReceived = new JSONObject(response.getEntity(String.class));
+				JSONArray plainJson = new JSONArray(crypter.decrypt(jsonReceived.getString("users")));
+				jsonOutput = new JSONObject();
+				jsonOutput.put("users", plainJson);
+				return Response.ok(jsonOutput).build();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+				return Response.status(500).build();
+			}
+		}
+		else {
+			return Response.status(500).build();
+		}
+	}
+	
 	
 
 }

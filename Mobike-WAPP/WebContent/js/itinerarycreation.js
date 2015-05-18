@@ -54,6 +54,11 @@ $(document).ready(function(){
 		else
 			$('#narr').show();
 		
+	});
+	
+	$('#errclose').on('click', function(){
+		$('#reason').empty();
+		$('#errModal').modal('hide');
 	})
 	
 	$(window).on('resize', function(){
@@ -171,79 +176,97 @@ function setDestinations(){
 
 function createGPX(data) {
 	
-	displayNarrative(data);
-   var gpxString='';
-        gpxString += "<? xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"no\"?>\n" +
-                "<gpx\n" +
-                "  xmlns=\"http://www.topografix.com/GPX/1/0\"\n" +
-                "  version=\"1.0\" creator=\"MoBike Web App\"\n" +
-                "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-                "  xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">";
-        gpxString += "<metadata>\n"+
-                "<author>\n"+
-                "<email " +
-                "id=\""+'mobiketeam'+"\""+
-                " domain=\""+'gmail.com'+"\"/>\n"+
-                "</author>\n"+
-                "</metadata>\n";
-               
-    if (data.route){
-        var shapepoints = data.route.shape.shapePoints,
-            legs = data.route.legs,
-            i=0,
-            j=0,
-            k=0,
-            l=shapepoints.length,
-            lat,
-            lng;
-       
-        lat=''+shapepoints[k+0].toFixed(6);
-        lng=''+shapepoints[k+1].toFixed(6);
-        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n";
-       
-        for (i=0; i < legs.length; i++) {
-            for (j = 0; j < legs[i].maneuvers.length; j++) {
-                maneuver = legs[i].maneuvers[j];
-                k = maneuver.index;
-                if( k+11<l){
-                    lat=''+shapepoints[k+10].toFixed(6);
-                    lng=''+shapepoints[k+11].toFixed(6);
-                   
-                }
-                else{
-                    lat=''+shapepoints[k].toFixed(6);
-                    lng=''+shapepoints[k+1].toFixed(6);
-                }
-                j+=1;
-                gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n";
-            }
-        }
-       
-        lat=shapepoints[l-2].toFixed(6);
-        lng=shapepoints[l-1].toFixed(6);
-        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n<trk>\n<trkseg>\n";
-       
-       
-        for (i=0;i<shapepoints.length-1;i++) {
-            lat=''+shapepoints[i].toFixed(6);
-            lng=''+shapepoints[i+1].toFixed(6);
-            gpxString += "<trkpt lat=\"" + lat + "\" lon=\"" + lng + "\"></trkpt>\n";
-            i+=1;
-        }
-       
-        gpxString += "</trkseg>\n</trk>\n</gpx>";
-        
-        dis = data.route.distance * 1.6 * 1000;
-        time= data.route.time;
-        
-        $('time').text(secondsTimeSpanToHMS(time) + " ");
-        $('length').text(dis /1000 + " Km.");
-        
-        $('#time').val(secondsTimeSpanToHMS(time) + " ");
-        $('#length').val(dis /1000 + " Km.");
-        
-        gpxS = gpxString;
-    }
+	console.log(data);
+	if(data.info.statuscode != 0){
+		
+		for(i=0; i<data.info.messages.length;i++){
+			$('#reason').append(data.info.messages[i] + "<br/>");
+			console.log(data.info.messages[i]);
+			
+		}
+		
+		$('#errModal').modal('show');
+		
+		
+		
+	}
+	
+	else {
+		displayNarrative(data);
+		   var gpxString='';
+		        gpxString += "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"no\"?>\n" +
+		                "<gpx\n" +
+		                "  xmlns=\"http://www.topografix.com/GPX/1/0\"\n" +
+		                "  version=\"1.0\" creator=\"MoBike Web App\"\n" +
+		                "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+		                "  xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">";
+		        gpxString += "<metadata>\n"+
+		                "<author>\n"+
+		                "<email " +
+		                "id=\""+'mobiketeam'+"\""+
+		                " domain=\""+'gmail.com'+"\"/>\n"+
+		                "</author>\n"+
+		                "</metadata>\n";
+	               
+	    if (data.route){
+	        var shapepoints = data.route.shape.shapePoints,
+	            legs = data.route.legs,
+	            i=0,
+	            j=0,
+	            k=0,
+	            l=shapepoints.length,
+	            lat,
+	            lng;
+	       
+	        lat=''+shapepoints[k+0].toFixed(6);
+	        lng=''+shapepoints[k+1].toFixed(6);
+	        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n";
+	       
+	        for (i=0; i < legs.length; i++) {
+	            for (j = 0; j < legs[i].maneuvers.length; j++) {
+	                maneuver = legs[i].maneuvers[j];
+	                k = maneuver.index;
+	                if( k+11<l){
+	                    lat=''+shapepoints[k+10].toFixed(6);
+	                    lng=''+shapepoints[k+11].toFixed(6);
+	                   
+	                }
+	                else{
+	                    lat=''+shapepoints[k].toFixed(6);
+	                    lng=''+shapepoints[k+1].toFixed(6);
+	                }
+	                j+=1;
+	                gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n";
+	            }
+	        }
+	       
+	        lat=shapepoints[l-2].toFixed(6);
+	        lng=shapepoints[l-1].toFixed(6);
+	        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n<trk>\n<trkseg>\n";
+	       
+	       
+	        for (i=0;i<shapepoints.length-1;i++) {
+	            lat=''+shapepoints[i].toFixed(6);
+	            lng=''+shapepoints[i+1].toFixed(6);
+	            gpxString += "<trkpt lat=\"" + lat + "\" lon=\"" + lng + "\"></trkpt>\n";
+	            i+=1;
+	        }
+	       
+	        gpxString += "</trkseg>\n</trk>\n</gpx>";
+	        
+	        dis = data.route.distance * 1.6 * 1000;
+	        time= data.route.time;
+	        
+	        $('time').text(secondsTimeSpanToHMS(time) + " ");
+	        $('length').text(dis /1000 + " Km.");
+	        
+	        $('#time').val(secondsTimeSpanToHMS(time) + " ");
+	        $('#length').val(dis /1000 + " Km.");
+	        
+	        gpxS = gpxString;
+	    }
+    
+	}
 };
 
 function secondsTimeSpanToHMS(s) {

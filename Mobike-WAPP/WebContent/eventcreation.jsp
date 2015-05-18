@@ -76,8 +76,7 @@
 							<div class="form-group">
 								<label for="invites" class="col-lg-2 control-label">Who</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" id="invites"
-										 placeholder="nickname separated by comma">
+									<button type="button" class="btn btn-primary btn-raised" id="who">Choose</button>
 								</div>
 							</div>
 							<br>
@@ -102,7 +101,7 @@
 								</tr>
 							</thead>
 							<div class="form-group">
-								<tbody></tbody>
+								<tbody id="route-table"></tbody>
 							</div>
 						</table>
 					</div>
@@ -117,29 +116,66 @@
 		style="position: fixed; z-index: 9999; bottom: 5%; right: 2%;"> </a>
 		
 		<div id="saveModal" class="modal fade">
- <div class="modal-dialog">
-  <div class="modal-content">
-   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Save a new Event</h4>
-   </div>
-   
-   <div id="mod-body" class="modal-body">
-        
-   Do you really want to save this event?
-    
-   </div>
-   
-   <div id="mod-footer" class="modal-footer">
-    <button type="button" class="btn btn-default shadow-level2" data-dismiss="modal" id="sno">No</button>
-    <button type="button" class="btn btn-primary shadow-level2" id="syes">Yes</button>
-    <button type="button" class="btn btn-primary shadow-level2" id="sclose" style="display:none">Close</button>
-    
-    </div>
-    
-   </div>
-  </div>
- </div> 
+			 <div class="modal-dialog">
+			  <div class="modal-content">
+			   <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal">&times;</button>
+			    <h4 class="modal-title">Save a new Event</h4>
+			   </div>
+			   
+			   <div id="mod-body" class="modal-body">
+			        
+			   Do you really want to save this event?
+			    
+			   </div>
+			   
+			   <div id="mod-footer" class="modal-footer">
+			    <button type="button" class="btn btn-default shadow-level2" data-dismiss="modal" id="sno">No</button>
+			    <button type="button" class="btn btn-primary shadow-level2" id="syes">Yes</button>
+			    <button type="button" class="btn btn-primary shadow-level2" id="sclose" style="display:none">Close</button>
+			    
+			    </div>
+			    
+			   </div>
+			  </div>
+ 		</div> 
+ 		
+ 		<div id="whoModal" class="modal fade">
+			 <div class="modal-dialog">
+			  <div class="modal-content">
+			   <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal">&times;</button>
+			    <h4 class="modal-title">Save a new Event</h4>
+			   </div>
+			   
+			   <div id="who-mod-body" class="modal-body">
+			   
+			   <table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>NickName</th>
+								</tr>
+							</thead>
+							<div class="form-group">
+								<tbody id="whotable"></tbody>
+							</div>
+						</table>
+			        
+			   Do you really want to save this event?
+			    
+			   </div>
+			   
+			   <div id="mod-footer" class="modal-footer">
+			    <button type="button" class="btn btn-default shadow-level2" data-dismiss="modal" id="sno">No</button>
+			    <button type="button" class="btn btn-primary shadow-level2" id="syes">Yes</button>
+			    <button type="button" class="btn btn-primary shadow-level2" id="sclose" style="display:none">Close</button>
+			    
+			    </div>
+			    
+			   </div>
+			  </div>
+ 		</div> 
 	<footer></footer>
 </body>
 

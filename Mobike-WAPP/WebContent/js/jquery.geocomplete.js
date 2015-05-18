@@ -53,7 +53,7 @@
     },
 
     maxZoom: 16,
-    types: ['geocode'],
+    //types: ['geocode'],
     blur: false
   };
 
@@ -149,7 +149,7 @@
     initGeocoder: function(){
 
       var options = {
-        types: this.options.types,
+        //types: this.options.types,
         bounds: this.options.bounds === true ? null : this.options.bounds,
         componentRestrictions: this.options.componentRestrictions
       };
@@ -159,8 +159,9 @@
       }
 
       this.autocomplete = new google.maps.places.Autocomplete(
-        this.input, options
-      );
+        this.input, options);
+      
+      //this.input, options); per riattivare il filtro sui risultati.
 
       this.geocoder = new google.maps.Geocoder();
 

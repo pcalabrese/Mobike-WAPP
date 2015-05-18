@@ -56,7 +56,7 @@
 	        				<br>	
 	        				<div class="form-group">
 	        					<div class="col-lg-12 col-lg-offset-3">
-	            				<label for="inputTo" class="control-label" id="adddest">Destinations + <div id="destrem">-</div></label>
+	            				<label for="inputTo" class="control-label" >Destinations <span class="mdi-content-add-circle-outline" style="font-size:22px" id="adddest"></span><span class="mdi-content-remove-circle-outline" style="font-size:22px" id="destrem"></span></label>
 	            				</div>
 	            				<div class="col-lg-12" id = "destli">
 	                				<input class="form-control dt" id="inputTo"  type="text">
@@ -190,6 +190,30 @@
    </div>
   </div>
  </div> 
+ 
+ <div id="errModal" class="modal fade">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Error!</h4>
+   </div>
+   
+   <div id="mod-body" class="modal-body">
+        
+   Can not retrieve an itinerary with the selected points. Maybe some destinations are into a restricted area. <br/>  
+   <small>Reason: <cite id="reason"></cite></small>
+    
+   </div>
+   
+   <div id="mod-footer" class="modal-footer">
+    <button type="button" class="btn btn-primary shadow-level2" id="errclose"">Close</button>
+    
+    </div>
+    
+   </div>
+  </div>
+ </div>
  
  <footer></footer>   				
         				

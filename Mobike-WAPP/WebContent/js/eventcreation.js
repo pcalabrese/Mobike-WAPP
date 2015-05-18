@@ -22,10 +22,26 @@ $('document').ready(function() {
 	$('#uploadbtn').on('click', function() {
 		saveEvent();
 		});
+	
+	$('#who').on('click', function(){
+		$.ajax({
+			type: 'GET', 
+			url: "/WAPP/ops/users/retrieveall",
+			success: function (data) {
+				console.log(data);
+				for(i=0;i<data.users.length;i++){
+					$('#whotable').append('<tr><td><input type="radio" name="userId" value="'+data.users[i].id+'"/></td><td>'+data.users[i].nickname+'</td></tr>');
+				}
+				$('#whoModal').modal('show');
+			},
+			error: function(data) { alert("error");}, 
+			failure: function(data) {alert("error");}
+		})
+	})
 
 	function makeTable(data) {
 			for (i = 0; i < data.length; i++) {
-					$("tbody").append("<tr><td><input type=\"radio\" id=\"routeId\" name=\"routeId\" value=\""
+					$("#route-table").append("<tr><td><input type=\"radio\" id=\"routeId\" name=\"routeId\" value=\""
 										+ data[i].id
 										+ "\"> <a href=\"javascript:apri(\'http://mobike.ddns.net/WAPP/itineraries/"
 										+ data[i].id + "\');\">"
