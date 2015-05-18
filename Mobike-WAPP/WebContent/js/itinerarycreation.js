@@ -78,7 +78,7 @@ $(document).ready(function(){
 				var lng = data.results[0].geometry.location.lng;
 				
 				var ll = {latLng: {lat: lat, lng: lng}};
-				//console.log(ll);
+				
 				destinations.push(ll);
 			});
 		});
@@ -215,8 +215,7 @@ function createGPX(data) {
 	            j=0,
 	            k=0,
 	            l=shapepoints.length,
-	            lat,
-	            lng;
+	            lat,lng;
 	       
 	        lat=''+shapepoints[k+0].toFixed(6);
 	        lng=''+shapepoints[k+1].toFixed(6);
@@ -225,7 +224,7 @@ function createGPX(data) {
 	        for (i=0; i < legs.length; i++) {
 	            for (j = 0; j < legs[i].maneuvers.length; j++) {
 	                maneuver = legs[i].maneuvers[j];
-	                k = maneuver.index;
+	                /*k = maneuver.index;
 	                if( k+11<l){
 	                    lat=''+shapepoints[k+10].toFixed(6);
 	                    lng=''+shapepoints[k+11].toFixed(6);
@@ -234,7 +233,9 @@ function createGPX(data) {
 	                else{
 	                    lat=''+shapepoints[k].toFixed(6);
 	                    lng=''+shapepoints[k+1].toFixed(6);
-	                }
+	                } */
+	                lat = ''+maneuver.startPoint.lat;
+	                lng = ''+maneuver.startPoint.lng;
 	                j+=1;
 	                gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n";
 	            }
