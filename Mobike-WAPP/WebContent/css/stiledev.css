@@ -16,6 +16,10 @@ body {
   color: #5a5a5a;
 }
 
+.pac-container {
+    /* put Google geocomplete list on top of Bootstrap modal */
+    z-index: 9999;
+}
 
 .title-name {
 color:#ffffff !important;

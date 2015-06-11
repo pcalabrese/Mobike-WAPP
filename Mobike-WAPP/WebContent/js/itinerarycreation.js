@@ -97,7 +97,7 @@ $(document).ready(function(){
 	    	           /* Pass an object with a property called draggable set to true to enable the draggable feature of the ribbon
 	    	            and draggablepoi set to true to enable the draggable feature of the POIs. This parameter
 	    	            is optional and is disabled by default.*/
-	    	            {ribbonOptions:{draggable:true,draggablepoi:true}}, 
+	    	            {routeOptions:{fullShape:true},ribbonOptions:{draggable:true,draggablepoi:true}}, 
 	    	            
 	    	            createGPX
 	    	          );
@@ -216,34 +216,38 @@ function createGPX(data) {
 	            k=0,
 	            l=shapepoints.length,
 	            lat,lng;
-	       
+	        
+	        
 	        lat=''+shapepoints[k+0].toFixed(6);
 	        lng=''+shapepoints[k+1].toFixed(6);
-	        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n";
+	        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"><name>START</name></wpt>\n";
+	        
+	        lat=shapepoints[l-2].toFixed(6);
+	        lng=shapepoints[l-1].toFixed(6);
+	        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"><name>END</name></wpt>\n<rte>\n";
 	       
 	        for (i=0; i < legs.length; i++) {
 	            for (j = 0; j < legs[i].maneuvers.length; j++) {
 	                maneuver = legs[i].maneuvers[j];
-	                /*k = maneuver.index;
-	                if( k+11<l){
-	                    lat=''+shapepoints[k+10].toFixed(6);
-	                    lng=''+shapepoints[k+11].toFixed(6);
+	                k = maneuver.index;
+	                var manstart = data.route.shape.maneuverIndexes[k]*2;
+	                
+	                if( manstart+5<l){
+	                    lat=''+shapepoints[manstart+4]/*.toFixed(6)*/;
+	                    lng=''+shapepoints[manstart+5]/*.toFixed(6)*/;
 	                   
 	                }
 	                else{
-	                    lat=''+shapepoints[k].toFixed(6);
-	                    lng=''+shapepoints[k+1].toFixed(6);
-	                } */
-	                lat = ''+maneuver.startPoint.lat;
-	                lng = ''+maneuver.startPoint.lng;
+	                    lat=''+shapepoints[manstart]/*.toFixed(6)*/;
+	                    lng=''+shapepoints[manstart+1]/*.toFixed(6)*/;
+	                } 
+	               
 	                j+=1;
-	                gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n";
+	                gpxString += "<rtept lat=\"" + lat + "\" lon=\"" + lng + "\"></rtept>\n";
 	            }
 	        }
 	       
-	        lat=shapepoints[l-2].toFixed(6);
-	        lng=shapepoints[l-1].toFixed(6);
-	        gpxString += "<wpt lat=\"" + lat + "\" lon=\"" + lng + "\"></wpt>\n<trk>\n<trkseg>\n";
+	        gpxString += "</rte>\n<trk>\n<trkseg>\n"
 	       
 	       
 	        for (i=0;i<shapepoints.length-1;i++) {

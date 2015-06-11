@@ -305,4 +305,10 @@ public class PagesController {
 	public Response test(){
 		return Response.ok(new Viewable("/test.jsp",null)).build();
 	}
+	
+	@GET
+	@Path("/itineraries/gnew")
+	public Response gitinerary(){
+		return Response.ok(new Viewable("/gitinerarycreation.jsp", null)).build();
+	}
 }
